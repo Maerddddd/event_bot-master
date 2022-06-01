@@ -5,12 +5,7 @@
         max-width="400"
         @click="select"
         >
-        <v-img
-            class="white--text align-end"
-            height="200px"
-            :src="session.img"
-            >
-            <!-- <div class="view-detail">View Detail</div> -->
+        <v-img height="200px" :src="session.img">
         </v-img>
         <div class="card-content">
             <div>
@@ -27,7 +22,7 @@
                     :class="n === 1 && 'mt-auto'"
                     class="iconeiei"
                     tile
-                >
+                    >
                     <v-icon :color="(session.certificate == 'Yes')? '#83C4F3' : '#EAEAEA' ">
                         mdi-certificate-outline
                     </v-icon>
@@ -95,7 +90,6 @@ export default {
         position: absolute;
         bottom: 11px;
         right: 11px;
-
     }
     .v-card+.v-card{
         margin-top: 10px;

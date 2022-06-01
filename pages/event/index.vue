@@ -9,11 +9,6 @@
             <v-row >
                 <v-col cols="12" >
                     <div class ="month-head">
-                      <!-- <v-select
-                        :items="items"
-                        :label= "list.month"
-                        solo
-                      ></v-select>  -->
                       {{list.month}}
                     </div>
                     <card

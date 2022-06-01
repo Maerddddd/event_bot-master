@@ -116,7 +116,7 @@
                   </v-radio-group>
 
                   <v-subheader>
-                  Support:{{food}},{{addevent_form.food_type}}
+                  Support:
                   </v-subheader>
                   <v-checkbox
                     v-model="food"
@@ -208,7 +208,7 @@
   }
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 
 .card-style{
   margin: 20px;

@@ -6,13 +6,16 @@
     >
       <img src="~assets/logo.png" width="150px">
       <v-spacer></v-spacer>
+      <v-text>Admin</v-text>
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
     <v-row>
-      <v-col cols="3" class="nav">
-        <div>
+      <v-col cols="2"
+            sm="2"
+            md="2" 
+            class="nav">
         <v-navigation-drawer
           permanent
           >
@@ -42,42 +45,41 @@
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
-        </div>
       </v-col>
-
-      <v-spacer></v-spacer>
-
-      <v-col cols="8"
+      <v-col cols="9"
+            sm="9"
+            md="9"
         v-if="state_tab==1"> 
           123
       </v-col>
-      <v-col cols="8"
-        v-if="state_tab==2">
-          456
+      <v-col cols="10"
+            sm="10"
+            md="10"
+            align="start"
+            class="content_style"
+            v-if="state_tab==2">
+            
+          <member_crud/>
       </v-col>
-      <v-col cols="8"
+      <v-col cols="10"
+             sm="10"
+             md="10"
+             align="start"
+             class="content_style"
         v-if="state_tab==3">
-        <addevent @sendData="addeventted"/>
+        <event_crud/>
       </v-col>
-      <v-spacer></v-spacer>
+     
       </v-row>
     </div>
 </template>
 <script>
-  import addevent from '~/components/addevent'
+  import member_crud from '~/pages/admin/Members'
+  import event_crud from '~/pages/admin/EventCRUD'
   import axios from 'axios'
   export default {
     data(){
-    return {
-        // addevent_form:{
-        //             title:'',
-        //             organizer:'',
-        //             date:'',
-        //             start_time_select:'',
-        //             end_time_select:'',
-        //             description:'',
-        //             num:'',
-        //             },
+      return {
         selectedItem: null,
         nav_list: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard'},
@@ -85,28 +87,24 @@
         { title: 'Event', icon: 'mdi-alpha-e-box'},
         ],
         state_tab: 1,
-        components:{ 
-          addevent
-        }
+        
         
     }
     },
+    components:{ 
+          member_crud,
+          event_crud,
+        },
+
     methods: {
       link(status){
         this.state_tab = status
-      },
-      addeventted(postData){
-        // console.log("eiei=",postData)
-        axios.post("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json",postData).then(res=>{
-          console.log(res);
-        })
-      }
+      }, 
     },
-     
   }
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
   .list-style{
   height: 100vh;
   
@@ -123,5 +121,12 @@
 }
 .nav{
   padding-bottom: 0px;
+  padding-right: 0px;
+  
 }
+.content_style{ 
+  
+  padding-right: 10px;
+}
+
 </style>

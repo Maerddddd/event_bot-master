@@ -20,7 +20,7 @@ export default {
     .v-application{
         width: 100%;
         font-family:'Roboto', sans-serif;
-        background-color:white !important;
+        background-color:#F6FBFF !important;
     }
     .v-application .primary{
         background-color:#83C4F3 !important;
@@ -67,6 +67,9 @@ export default {
         img{
             border-radius: 50%;
         }
+    }
+    .v-card{ 
+        padding: 0px !important;
     }
 
 </style>

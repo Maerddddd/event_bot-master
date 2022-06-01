@@ -98,7 +98,8 @@
                 },
             register(){
                 this.$store.dispatch('setRegister', this.form)
-                this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister).then((res) => {
+                // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister).then((res) => {
+                this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}.json`, this.$store.getters.getRegister).then((res) => {
                 this.$router.push('/register/done')
                 })
             }

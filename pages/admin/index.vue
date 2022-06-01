@@ -15,7 +15,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="email"
+              v-model="password"
               label="Password"
 
             ></v-text-field>
@@ -32,10 +32,28 @@
     </v-container>
 </template>
 <script>
+
+
 export default {
+  data:() => ({
+    username:'',
+    password:'',
+    
+  }),
   methods: {
     Signin(){
-      
+      if (this.username == 'admin' && this.password =='admin')
+      {
+        this.$router.push('/admin/main2')
+      }
+      else {
+        const Swal = require('sweetalert2')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+})
+}
     },
   }
 }

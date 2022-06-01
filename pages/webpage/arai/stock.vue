@@ -261,7 +261,7 @@
   }
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped >
 .list-style{
   height: 100vh;
   
