@@ -1,3 +1,45 @@
+import Vuex from "vuex"
+import axios from "axios"
+
+const createStore=()=>{
+  return new Vuex.Store({
+    state:{
+      loadData:[]
+    },
+    mutations:{
+      setPostState(state,post){
+        state.loadData=post
+      },
+      addPostState(state,post){
+        state.loadData.push(post)
+      },
+      editPostState(state,editpost){
+        const postIndex=state.loadData.findIndex
+      }
+    },
+    
+    actions:{
+      nuxtServerInit(vuexContext,context){
+        return axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
+        .then(res=>{
+          const data=[];
+          for(const key in res.data){
+            data.push({...res.data[key],id:key})
+          }
+          vuexContext.commit("setPostState",data)
+        }).catch(e=>context.error(e));
+      }
+    },
+    getters:{
+      getAllPosts(state){
+          return state.loadData
+      }
+    }
+  })
+}
+export default createStore
+
+
 export const state = () => ({
   line: {
     pictureUrl: null,
@@ -29,57 +71,6 @@ export const state = () => ({
         food:'',
   },
     data: {  
-    //     agenda: [
-    //       {
-    //         date: "20 March 2020",
-    //         sessions: [
-    //           {
-    //             time: "10:00 AM",
-    //             title: "INTRODUCTIONS-1",
-    //             spaker: "Marvelous Team",
-    //             image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-    //             duringTime: "100 min"
-    //           },
-    //           {
-    //             type: "set",
-    //             time: "12:00 AM",
-    //             sessionSet: [
-    //               {
-    //                 title: "INTRODUCTIONS-2",
-    //                 spaker: "Marvelous Team",
-    //                 image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-    //                 duringTime: "100 min"
-    //               },
-    //               {
-    //                 title: "INTRODUCTIONS-3",
-    //                 spaker: "Marvelous Team",
-    //                 image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-    //                 duringTime: "100 min"
-    //               }
-    //             ]
-    //           }
-    //         ]
-    //       },
-    //       {
-    //         date: "21 March 2020",
-    //         sessions: [
-    //           {
-    //             time: "10:00 AM",
-    //             title: "INTRODUCTIONS-4",
-    //             spaker: "Marvelous Team",
-    //             image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-    //             duringTime: "100 min"
-    //           },
-    //           {
-    //             time: "10:00 AM",
-    //             title: "INTRODUCTIONS-5",
-    //             spaker: "Marvelous Team",
-    //             image: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-    //             duringTime: "100 min"
-    //           }
-    //         ]
-    //       }
-    //     ],
         event: [
           {
             month: "Jan",

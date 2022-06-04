@@ -166,13 +166,13 @@
                     Support:
                     </v-subheader>
                     <v-checkbox
-                      v-model="food_enabled"
+                      v-model="food_checkbox"
                       color="#83C4F3"
                       label="Food"
                       hide-details
                     ></v-checkbox>
                     <v-select
-                    :disabled="!food_enabled"
+                    :disabled="!food_checkbox"
                     v-model="editedItem.food_type"
                     :items ="food_type"
                     color="#83C4F3"
@@ -186,8 +186,8 @@
                     </v-subheader>
                     <v-select
                     color="#83C4F3"
-                    v-model="editedItem.num"
-                    :items="num"
+                    v-model="editedItem.member_slot"
+                    :items="member_slot"
                     dense
                     outlined
                   ></v-select>
@@ -281,10 +281,10 @@
                   </v-card-text>
 
                   <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    จำนวนคนที่เปิดรับ:
+                    Member Slot:
                   </v-card-subtitle>
                   <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.num}}</div>
+                    <div>{{editedItem.member_slot}}</div>
                   </v-card-text>
 
 
@@ -353,10 +353,10 @@ import { format, parseISO } from 'date-fns'
     data () {
       return {
         food_type: ['อาหารกลางวัน','อาหารว่าง','อาหารกลางวันและอาหารว่าง'],
-        food_enabled: false,
+        food_checkbox: false,
         start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
         end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-        num: ['10','20','30','40','50'],
+        member_slot: ['10','20','30','40','50','60'],
         date: null,
         menu: false,
         certificate: null,
@@ -389,7 +389,7 @@ import { format, parseISO } from 'date-fns'
         end_time_select:'',
         image:'',
         description:'',
-        num:'',
+        member_slot:'',
         food_type:'',
         certificate:'',
         
@@ -402,7 +402,7 @@ import { format, parseISO } from 'date-fns'
         end_time_select:'',
         image:'',
         description:'',
-        num:'',
+        member_slot:'',
         food_type:'',
         certificate:'',
         

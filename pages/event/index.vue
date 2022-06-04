@@ -8,9 +8,9 @@
         <v-container class ="pt-0 pb-0">
             <v-row >
                 <v-col cols="12" >
-                    <div class ="month-head">
+                    <!-- <div class ="month-head">
                       {{list.month}}
-                    </div>
+                    </div> -->
                     <card
                     v-for="item in list.sessions"
                     :session="item"
@@ -27,7 +27,7 @@ export default {
     components: {
         card
     },
-  data(){
+  data() {
     return {
         isShowDialog: false,
         index: 0,
