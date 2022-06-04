@@ -94,7 +94,7 @@ export default {
         },
         certificate:{
             type:String,
-            require:true
+            require:false
         },
         food_type:{
             type:String,
@@ -136,7 +136,7 @@ export default {
         //     })
         // },
         more_detail(){
-            this.$router.push('/user/event/compo/detail/'+this.id)
+            this.$router.push('/user/event/compo/'+this.id)
         
     },
     // computed:{

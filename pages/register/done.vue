@@ -44,13 +44,13 @@ export default {
     }
   },
   computed: {
-                getLine(){
-                        return this.$store.getters.getLine;      
-                        }
-                    },
+      getLine(){
+              return this.$store.getters.getLine;      
+              }
+          },
   methods: {
     selectevent(){
-      this.$router.push('/event')
+      this.$router.push('/user/event/')
     },
     close(){
       liff.closeWindow();

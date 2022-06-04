@@ -141,7 +141,7 @@ export default {
                     {{title}}
                 </v-card-title>
                     <v-card-text class="text--primary">
-                    {{rganizer}}
+                    {{organizer}}
                     </v-card-text>
             </div>
             </div>
@@ -169,7 +169,7 @@ export default {
 export default {
     data(){
         return{
-            card_detail:{...this.post}
+            ...this.post
         }
     },
     props:{
@@ -180,10 +180,11 @@ export default {
     },
     methods: {
         signup(){
-        //   this.$router.push('/event/event-detail')
-        // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}.json`, {eventId: this.id}).then((res) => {
-        // this.$router.push('/event/done')
-        //     })
+        //  this.$router.push('/event/event-detail')
+        console.log(this.post);
+        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()}).then((res) => {           
+        this.$router.push('/user/event/done')
+            })
         },
     },
 }
@@ -204,8 +205,7 @@ export default {
     .card-content{
         display: flex;
         justify-content: space-between;
-        padding: 15px ;
-        
+        padding: 15px ; 
     }
     .v-card__title,.v-card__text{
         padding: 0px;

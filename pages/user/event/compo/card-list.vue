@@ -8,6 +8,9 @@
                 :title="post.title"
                 :organizer="post.organizer"
                 :image="post.image"
+                :certificate="post.certificate"
+                :food_type="post.food_type"
+                :member_slot="post.member_slot"
                 :key="post.id"
             />
         </v-col>

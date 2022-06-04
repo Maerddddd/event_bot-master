@@ -111,6 +111,10 @@
     .v-list-item{
         padding: 0;
     }
+    .theme--light.v-list {
+    background: #F6FBFF;
+    
+    }
     
     
 

@@ -287,6 +287,9 @@
                     <div>{{editedItem.member_slot}}</div>
                   </v-card-text>
 
+                  <v-data-table>
+                    
+                  </v-data-table>
 
   
             <v-card-actions>
