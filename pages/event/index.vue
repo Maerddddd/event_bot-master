@@ -1,25 +1,25 @@
 <template>
   <div>
-        <v-app-bar color ="#83C4F3"
-        flat
-        dense>
-        <v-toolbar-title>Select Event</v-toolbar-title>
-        </v-app-bar>
-        <v-container class ="pt-0 pb-0">
-            <v-row >
-                <v-col cols="12" >
-                    <!-- <div class ="month-head">
-                      {{list.month}}
-                    </div> -->
-                    <card
-                    v-for="item in list.sessions"
-                    :session="item"
-                    :month="month"
-                    :key="item.id"/>
-                    </v-col>
-            </v-row>
-        </v-container>
-</div>
+    <v-app-bar color ="#83C4F3"
+    flat
+    dense>
+    <v-toolbar-title>Select Event</v-toolbar-title>
+    </v-app-bar>
+    <v-container class ="pt-0 pb-0">
+        <v-row >
+            <v-col cols="12" >
+                <!-- <div class ="month-head">
+                  {{list.month}}
+                </div> -->
+                <card
+                v-for="item in list.sessions"
+                :session="item"
+                :month="month"
+                :key="item.id"/>
+                </v-col>
+        </v-row>
+    </v-container>
+  </div>
 </template>
 <script>
 import card from '~/components/card'

@@ -1,139 +1,34 @@
-<!-- <template>
-<v-container>
-    <v-card
-        class="mx-auto"
-        max-width="400"
-        >
-        <v-img
-            class="white--text align-end"
-            height="200px"
-            :src="session.img"
-            >
-        </v-img>
-        <div class="card-content">
-            <div>
-                
-                <v-card-title class ="pb-0">
-                    {{session.title}}
-                </v-card-title>
-                    <v-card-text class="text--primary">
-                    {{session.organizer}}
-                    
-                    </v-card-text>
-            </div>
-            </div>
-            <div class="card-content2">
-                <p class="event-des ">Date: {{session.date}}</p>
-                <p class="event-des mb-3">Time: {{session.time}}</p>
-                <p class="event-des mb-3">
-                    {{session.detail}}                          
-                </p>
-                <p class="event-des">
-
-                </p>
-                <p class="event-des mb-3">Signer: {{session.signer}}/{{session.maxsigner}}</p>
-                <p class="event-des ">Food: {{session.food}}</p>
-                <p class="event-des mb-3">Certificate: {{session.certificate}}</p>
-
-            </div>
-            
-        </v-card>
-        <v-btn
-            end
-            large
-            color="primary"
-            class ="w-100 mt-2 " @click="signup">
-            Sign up
-        </v-btn>
-        </v-container>
-
-
-                        
-</template>
-<script>
-// console.log(this.$route.query.id)
-export default {
-    props: ['session'],
-    methods: {
-        signup(){
-        //   this.$router.push('/event/event-detail')
-        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}.json`, {eventId: this.session.id}).then((res) => {
-        this.$router.push('/event/done')
-            })
-        },
-  }
-    
-}
-</script>
-
-<style lang="scss" scoped>
-
-    .v-card__title{
-        font-size: 16px;
-        color:#314F64;
-    }
-    .v-card__text{
-        font-size: 14px;
-        color:#454545;
-    }
-    .subheading{
-        font-size: 14px;
-    }
-    .card-content{
-        display: flex;
-        justify-content: space-between;
-        padding: 15px ;
-        
-    }
-    .v-card__title,.v-card__text{
-        padding: 0px;
-    }
-    .iconeiei{
-        padding: 0px;
-        box-shadow: none !important;
-    }
-    .mx-auto{
-        border-radius:10px;
-    }
-    .view-detail{
-        font-size: 13px;
-        color:#314F64;
-        border-radius: 8px;
-        padding: 10px;
-        background-color: white;
-        font-weight: bold;
-        display: inline;
-        position: absolute;
-        bottom: 11px;
-        right: 11px;
-
-    }
-    .v-card+.v-card{
-        margin-top: 10px;
-    }
-    .card-content2{
-        padding:  0px 15px ;
-        padding-bottom: 15px !important;
-        
-    }
-    .event-des{
-        font-size: 14px !important;
-        color:#314F64;
-        margin: 0px;
-    }
-</style> -->
-
 <template>
-    <v-container>
+    <v-container> 
     <v-card
         class="mx-auto"
         max-width="400"
         >
-        <v-img
-            class="white--text align-end"
-            height="200px"
-            :src="image"
+        <v-img v-if="image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="200px" class="pa-3">
+            <v-row
+            align="center"
+            justify="end"
+            class="pa-2"
             >
+            <v-sheet
+                rounded="xl"
+            >
+                <span class="subheading pa-2">0 / {{member_slot}}</span>
+            </v-sheet>
+            </v-row>
+        </v-img>
+        <v-img v-else :src="image" height="200px" class="pa-3">
+            <v-row
+            align="center"
+            justify="end"
+            class="pa-2"
+            >
+            <v-sheet
+                rounded="xl"
+            >
+                <span class="subheading pa-2">0 / {{member_slot}}</span>
+            </v-sheet>
+            </v-row>    
         </v-img>
         <div class="card-content">
             <div>
@@ -145,16 +40,16 @@ export default {
                     </v-card-text>
             </div>
             </div>
+            <v-divider></v-divider>
             <div class="card-content2">
                 <p class="event-des ">Date: {{date}}</p>
                 <p class="event-des mb-3">Time: {{start_time_select}} - {{end_time_select}}</p>
+                <p class="event-des">Description:</p>
                 <p class="event-des mb-3">{{description}}</p>
-                <p class="event-des mb-3">Certificate: {{certificate}}</p>
-                <p class="event-des ">Food: {{food_type}}</p>
-                <p class="event-des mb-3">Member slot: {{member_slot}}</p>
+                <p class="event-des">Certificate: {{certificate}}</p>
+                <p class="event-des">Support: {{food_type}}</p>
 
             </div>
-            
         </v-card>
         <v-btn
             end
@@ -165,6 +60,7 @@ export default {
         </v-btn>
         </v-container>                    
 </template>
+
 <script>
 export default {
     data(){
@@ -180,10 +76,15 @@ export default {
     },
     methods: {
         signup(){
-        //  this.$router.push('/event/event-detail')
-        console.log(this.post);
-        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()}).then((res) => {           
-        this.$router.push('/user/event/done')
+        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()})
+        .then((res) => {
+            this.$router.push('/user/event/done')
+            const Swal = require('sweetalert2')
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Your account has been registered.',
+                })
             })
         },
     },
@@ -234,7 +135,7 @@ export default {
         margin-top: 10px;
     }
     .card-content2{
-        padding:  0px 15px ;
+        padding: 15px;
         padding-bottom: 15px !important;
         
     }

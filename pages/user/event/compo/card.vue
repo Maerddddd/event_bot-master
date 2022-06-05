@@ -1,48 +1,36 @@
 <template>
 <v-container>
-    <!-- <v-card
-        class="mx-auto"
-        max-width="400"
-        @click="select"
-        >
-        <v-img height="200px" :src="session.img">
-        </v-img>
-        <div class="card-content">
-            <div>
-                <v-card-title class ="pb-0">
-                    {{session.title}}
-                </v-card-title>
-                    <v-card-text class="text--primary">
-                    {{session.organizer}}
-                    </v-card-text>
-            </div>
-                <v-card
-                    v-for="n in 1"
-                    :key="n"
-                    :class="n === 1 && 'mt-auto'"
-                    class="iconeiei"
-                    tile
-                    >
-                    <v-icon :color="(session.certificate == 'Yes')? '#83C4F3' : '#EAEAEA' ">
-                        mdi-certificate-outline
-                    </v-icon>
-                    <v-icon :color="(session.food == 'Yes')? '#83C4F3' : '#EAEAEA' ">
-                        mdi-food
-                    </v-icon>
-                    <v-icon :color="(session.signer > 0)? '#83C4F3' : '#EAEAEA' ">
-                        mdi-account
-                    </v-icon>
-                    <span class="subheading">{{session.signer}}/{{session.maxsigner}}</span>
-                </v-card>             
-            </div>
-        </v-card> -->
-
         <v-card
         class="mx-auto"
         max-width="400"
         @click="more_detail"
         >
-        <v-img height="200px" :src="image"></v-img>
+        <v-img v-if="image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="200px" class="pa-3">
+            <v-row
+            align="center"
+            justify="end"
+            class="pa-2"
+            >
+            <v-sheet
+                rounded="xl"
+            >
+                <span class="subheading pa-2">0 / {{member_slot}}</span>
+            </v-sheet>
+            </v-row>
+        </v-img>
+        <v-img v-else :src="image" height="200px" class="pa-3">
+            <v-row
+            align="center"
+            justify="end"
+            class="pa-2"
+            >
+            <v-sheet
+                rounded="xl"
+            >
+                <span class="subheading pa-2">0 / {{member_slot}}</span>
+            </v-sheet>
+            </v-row>    
+        </v-img>
         <div class="card-content">  
             <div>
                 <v-card-title class ="pb-0">
@@ -54,20 +42,14 @@
                 </v-card-text>
             </div>
                 <v-card class="icon-style" tile >
-                    <v-icon :color="(certificate == 'No certificate')? '#83C4F3' : '#EAEAEA'">
+                    <v-icon :color="(certificate == 'Have certificate')? '#83C4F3' : '#EAEAEA'">
                         mdi-certificate-outline
                     </v-icon>
-                    <v-icon :color="(food_type == 'อาหารกลางวันและอาหารว่าง','อาหารกลางวัน','อาหารว่าง')? '#83C4F3' : '#EAEAEA'">
+                    <v-icon :color="(food_type == '')? '#EAEAEA' : '#83C4F3' ">
                         mdi-food
-                    </v-icon>
-                    <v-icon :color="(member_slot > 0)? '#83C4F3' : '#EAEAEA'">
-                        mdi-account
                     </v-icon>
                 </v-card>             
             </div>
-            <!-- <v-btn>
-                <nuxt-link :to ="more_detail">test</nuxt-link>
-            </v-btn> -->
         </v-card>
     </v-container>
 </template>
@@ -112,41 +94,10 @@ export default {
     }),
     methods: {
 
-        // async test(){
-        // console.log("eiei");
-        //    await this.getData().then((result)=>{
-        //         console.log(result);
-        //     })
-        //     console.log("zaza");
-        //     // await axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
-        //     // .then(res =>{
-        //     //     console.log(res);
-        //     // })
-        // },
-
-        // getData(){
-        //     return new Promise((resolve,reject)=>{
-        //         setTimeout(()=>{
-        //         const data = axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
-        //         .then(res =>{
-        //             return res
-        //         })
-        //         resolve(data)
-        //         },4000)
-        //     })
-        // },
         more_detail(){
             this.$router.push('/user/event/compo/'+this.id)
         
     },
-    // computed:{
-    //         more_detail(){
-    //             return '/user/event/compo/detail/'+this.id
-    //         // this.$router.push('/user/event/compo/detail?id=' + this.session.id)
-    //         // this.$router.push('/user/event/compo/detail/'+this.id)
-    //     },
-    // }
-        
   }
 }
 

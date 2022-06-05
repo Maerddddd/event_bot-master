@@ -27,7 +27,7 @@
         <v-spacer></v-spacer>
         <v-dialog
           v-model="dialog"
-          max-width="500px"
+          max-width="900px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-icon
@@ -42,10 +42,10 @@
           </template>
           <v-card>
             <v-card-title class="title-dialog">{{formTitle }}</v-card-title>
-            <v-form>
-                <v-subheader>
-                    Event name:
-                  </v-subheader>
+            <v-row>
+              <v-col>
+                <v-form>
+                  <v-card-subtitle class="pa-0 pt-3 font_size_head">Event title:</v-card-subtitle>
                   <v-text-field
                     color="#83C4F3"
                     v-model="editedItem.title"
@@ -53,9 +53,7 @@
                     dense
                   ></v-text-field>
             
-                  <v-subheader>
-                    Organizer:
-                  </v-subheader>
+                  <v-card-subtitle class="pa-0 font_size_head">Organizer:</v-card-subtitle>
                   <v-text-field
                     color="#83C4F3"
                     v-model="editedItem.organizer"
@@ -63,9 +61,14 @@
                     dense
                   ></v-text-field>
 
-                  <v-subheader>
-                    Date:
-                  </v-subheader>
+                  <v-card-subtitle class="pa-0 font_size_head">Image:</v-card-subtitle>
+                  <v-text-field
+                    color="#83C4F3"
+                    v-model="editedItem.image"
+                    outlined
+                    dense
+                  ></v-text-field> 
+                  <v-card-subtitle class="pa-0 font_size_head">Date:</v-card-subtitle>
                   <v-menu
                     v-model="menu"
                     :close-on-content-click="false"
@@ -95,11 +98,10 @@
                       
                     </v-date-picker>
                   </v-menu>
+                  <v-container class="pa-0 pt-4">
                   <v-row>
                   <v-col class="time_style">
-                  <v-subheader>
-                    Start time:
-                  </v-subheader>
+                 <v-card-subtitle class="pa-0 font_size_head">Start time:</v-card-subtitle>
                   <v-select
                     color="#83C4F3"
                     v-model="editedItem.start_time_select"
@@ -109,9 +111,7 @@
                   ></v-select>
                   </v-col>
                   <v-col class="time_style">
-                    <v-subheader>
-                    End time:
-                  </v-subheader>
+                  <v-card-subtitle class="pa-0 font_size_head">End time:</v-card-subtitle>
                   <v-select
                     color="#83C4F3"
                     v-model="editedItem.end_time_select"
@@ -121,20 +121,16 @@
                   ></v-select>
                   </v-col>
                   </v-row>
+                  </v-container>
 
-                  <v-subheader>
-                    Image:
-                  </v-subheader>
-                  <v-text-field
-                    color="#83C4F3"
-                    v-model="editedItem.image"
-                    outlined
-                    dense
-                  ></v-text-field>
-                  
-                  <v-subheader>
-                    Event description:
-                  </v-subheader>
+            </v-form>
+              </v-col>
+
+              <v-divider vertical></v-divider>
+
+              <v-col>
+                <v-form>
+                  <v-card-subtitle class="pa-0 pt-3 font_size_head">Description:</v-card-subtitle>
                   <v-textarea
                     v-model="editedItem.description"
                     color="#83C4F3"
@@ -143,9 +139,7 @@
                   >
                   </v-textarea>
                     
-                    <v-subheader>
-                    Certificate:
-                    </v-subheader>
+                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Certificate:</v-card-subtitle>
                     <v-radio-group
                       v-model="editedItem.certificate"
                       row
@@ -162,9 +156,7 @@
                       ></v-radio>
                     </v-radio-group>
 
-                    <v-subheader>
-                    Support:
-                    </v-subheader>
+                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Support:</v-card-subtitle>
                     <v-checkbox
                       v-model="food_checkbox"
                       color="#83C4F3"
@@ -181,9 +173,7 @@
                     class="mt-3"
                     ></v-select>
                     
-                    <v-subheader>
-                    จำนวนคนที่เปิดรับ:
-                    </v-subheader>
+                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Member slot:</v-card-subtitle>
                     <v-select
                     color="#83C4F3"
                     v-model="editedItem.member_slot"
@@ -191,8 +181,9 @@
                     dense
                     outlined
                   ></v-select>
-            </v-form>
-
+                </v-form>
+              </v-col>
+            </v-row>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -209,6 +200,7 @@
               >
                 Save
               </v-btn>
+              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -224,81 +216,88 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogDetail" max-width="600px"> 
+        <v-dialog v-model="dialogDetail" max-width="1200px"> 
           <v-card>
             <v-card-title class="title-card text-primary text-center">Event Detail</v-card-title>
+            <v-container fluid>
+            <v-row>
+              <v-col cols="6">
+                        <div class="image">
+                          <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px"></v-img>
+                          <v-img v-else :src="editedItem.image" height="250px"></v-img>
+                        </div>
+                        <v-card-subtitle class="pt-5 pb-0 font_size_head">
+                          Event title:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.title}}</div>
+                        </v-card-text>
 
-                  <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px" ></v-img>
-                  <v-img v-else :src="editedItem.image" height="250px" class="pa-3"></v-img>
-                  
-                  <v-card-subtitle class="pt-5 pb-0 font_size_head">
-                    Event title:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.title}}</div>
-                  </v-card-text>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Organizer:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.organizer}}</div>
+                        </v-card-text>
 
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Organizer:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.organizer}}</div>
-                  </v-card-text>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Description:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.description}}</div>
+                        </v-card-text>
 
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Description:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.description}}</div>
-                  </v-card-text>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Date:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div class="font_size">{{editedItem.date}}</div>
+                        </v-card-text>
 
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Date:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div class="font_size">{{editedItem.date}}</div>
-                  </v-card-text>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Time:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.start_time_select}} - {{editedItem.end_time_select}}</div>
+                        </v-card-text>
 
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Time:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.start_time_select}} - {{editedItem.end_time_select}}</div>
-                  </v-card-text>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Certificate:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.certificate}}</div>
+                        </v-card-text>
+                        
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Support:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.food_type}}</div>
+                        </v-card-text>
 
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Certificate:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.certificate}}</div>
-                  </v-card-text>
-                  
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Support:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.food_type}}</div>
-                  </v-card-text>
-
-                  <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                    Member Slot:
-                  </v-card-subtitle>
-                  <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                    <div>{{editedItem.member_slot}}</div>
-                  </v-card-text>
-
-                  <v-data-table>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Member Slot:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.member_slot}}</div>
+                        </v-card-text>
+                 
+              </v-col>
+              <v-divider vertical></v-divider>
+              <v-col cols="6">
+                <v-data-table>
                     
-                  </v-data-table>
-
-  
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDetail">OK</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+                </v-data-table>
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDetail">OK</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
       </v-toolbar>
     </template>
@@ -417,7 +416,7 @@ import { format, parseISO } from 'date-fns'
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'Add Event' : 'Edit Event'
       },
     },
 
@@ -511,6 +510,7 @@ import { format, parseISO } from 'date-fns'
 }
 .font_size_head{ 
   font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.6);
 }
 .title-dialog{ 
   font-size: 20px !important;
@@ -529,5 +529,8 @@ import { format, parseISO } from 'date-fns'
 }
 .time_style{
   padding: 0px 12px ;
+}
+.image{
+  padding: 0px 17px !important;
 }
 </style>

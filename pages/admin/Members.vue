@@ -4,7 +4,7 @@
     :items="member_data"
     :search="search"
     sort-by="calories"
-    class="elevation-1"
+    class="elevation-0"
   >
     <template v-slot:top>
       <v-toolbar

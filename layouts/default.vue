@@ -71,6 +71,19 @@ export default {
     .v-card{ 
         padding: 0px !important;
     }
+    .swal2-title{
+        font-family:'Roboto', sans-serif !important;
+        color: #314F64 !important;
+        font-size: 20px !important;
+    }
+    .swal2-html-container{
+        font-family:'Roboto', sans-serif !important;
+        font-size: 16px !important;
+    }
+    .swal2-confirm.swal2-styled{
+        font-family:'Roboto', sans-serif !important;
+        background-color: #83C4F3 !important;
+    }
 
 </style>
 

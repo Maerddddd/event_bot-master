@@ -43,7 +43,7 @@ export default {
     props: ['session','month'],
     methods: {
         select(){
-            this.$router.push('/event/event-detail?id=' + this.session.id)
+            this.$router.push('/event/event-detail?id='+this.session.id)
         },
   }
 }

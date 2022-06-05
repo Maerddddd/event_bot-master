@@ -45,6 +45,22 @@ export default {
       if (this.username == 'admin' && this.password =='admin')
       {
         this.$router.push('/admin/main2')
+          const Swal = require('sweetalert2')
+          const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+          Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
       }
       else {
         const Swal = require('sweetalert2')
@@ -52,7 +68,7 @@ export default {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-})
+        })
 }
     },
   }
@@ -64,7 +80,6 @@ export default {
     margin: 90px auto;
     width: auto;
   }
-
   .text-title{
     padding-top: 130px;
     padding-bottom: 70px;
@@ -74,12 +89,10 @@ export default {
   }
   .input-form{
     padding: 0px 35px;
-
   }
   .card-content{
     display: flex;
     justify-content: flex-end;
-      
   }
   .v-btn{
     width: 300px ;

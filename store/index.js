@@ -1,50 +1,10 @@
-// import Vuex from "vuex"
-// import axios from "axios"
-
-// const createStore=()=>{
-//   return new Vuex.Store({
-//     state:{
-//       loadData:[]
-//     },
-//     mutations:{
-//       setPostState(state,post){
-//         state.loadData=post
-//       },
-//       addPostState(state,post){
-//         state.loadData.push(post)
-//       },
-//       editPostState(state,editpost){
-//         const postIndex=state.loadData.findIndex
-//       }
-//     },
-
-//     actions:{
-//       nuxtServerInit(vuexContext,context){
-//         return axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
-//         .then(res=>{
-//           const data=[];
-//           for(const key in res.data){
-//             data.push({...res.data[key],id:key})
-//           }
-//           vuexContext.commit("setPostState",data)
-//         }).catch(e=>context.error(e));
-//       }
-//     },
-//     getters:{
-//       getAllPosts(state){
-//           return state.loadData
-//       }
-//     }
-//   })
-// }
-// export default createStore
-
 
 export const state = () => ({
   line: {
     pictureUrl: null,
     displayName: null,
     userId: 'U933cc0e91e577c936856fac8f5612798'
+    // เปลี่ยนเป็น null สำหรับใช้จริงนะจ๊ะ
   },
     dialog:{
         isShow:false,

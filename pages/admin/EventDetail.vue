@@ -438,7 +438,6 @@ export default {
         if (this.editedIndex > -1) {
           Object.assign(this.member_data[this.editedIndex], this.editedItem)
           this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.member_data[this.editedIndex].id}.json`,this.editedItem)
-          console.log(this.editedItem)
         } else {
           this.member_data.push(this.editedItem)
           this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`,this.editedItem)
