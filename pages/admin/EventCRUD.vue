@@ -42,6 +42,7 @@
           </template>
           <v-card>
             <v-card-title class="title-dialog">{{formTitle }}</v-card-title>
+            <v-container>
             <v-row>
               <v-col>
                 <v-form>
@@ -184,6 +185,7 @@
                 </v-form>
               </v-col>
             </v-row>
+            </v-container>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -285,8 +287,12 @@
               </v-col>
               <v-divider vertical></v-divider>
               <v-col cols="6">
-                <v-data-table>
-                    
+                <v-data-table
+                :headers="headers2"
+                :items="event_data"
+                :search="search"
+                sort-by="title"
+                class="elevation-0">
                 </v-data-table>
               </v-col>
             </v-row>
@@ -409,6 +415,20 @@ import { format, parseISO } from 'date-fns'
         certificate:'',
         
       },
+
+      headers2: [
+        {
+          text: 'Firstname',
+          align: 'start',
+          sortable: false,
+          value: 'firstname',
+        },
+        { text: 'Lastname', value: 'lastname' },
+        { text: 'Email', value: 'email' },
+        { text: 'Phone Number', value: 'phonenumber' },
+        { text: 'Date of birth', value: 'dateofbirth'},
+      ],
+      member_select_event_data: [],
       }
       
     },
@@ -436,10 +456,45 @@ import { format, parseISO } from 'date-fns'
       await this.initialize()
     },
 
+    // methods: {
+    //   async initialize () {
+    //     let res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
+    //     this.event_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
+    //   },
+    
     methods: {
       async initialize () {
-        let res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
-        this.event_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
+        // let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
+        // let select_events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json`)
+        // const entries_select_event = Object.entries(select_events.data)
+
+        // const entries_results =  Object.entries(events.data).map(([id , value]) => {
+        //   return [id,{
+        //     ...value,
+        //     members : entries_select_event
+        //         .filter(([userId, info]) => Object.entries(info).some(([seID,seValue]) => seID == id))
+        //         .map(([userId, info]) => ({userId : userId, ...info}))
+        //     }]
+        // })
+        // this.event_data = entries_results.map(([key,value]) => ({id: key , ...value }))
+        // console.log(this.event_data);
+
+        // let member = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
+        // this.event_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
+
+        let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
+        let select_events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json")
+        const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
+        const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
+
+        this.event_data = entries_events.map(e => {
+            return {
+                ...e,
+                members : entries_select_event
+                .filter(se =>  e.id in se)
+                .map(se => ({userId : se.id, time_stamp: se[e.id].time_stamp }))
+            }
+        })
       },
 
       editItem (item) {

@@ -44,7 +44,7 @@ export default {
     Signin(){
       if (this.username == 'admin' && this.password =='admin')
       {
-        this.$router.push('/admin/main2')
+        this.$router.push('/admin/main')
           const Swal = require('sweetalert2')
           const Toast = Swal.mixin({
           toast: true,

@@ -1,8 +1,9 @@
 <template>
-    <v-container> 
-    <v-card
+<v-container>
+        <v-card
         class="mx-auto"
         max-width="400"
+        @click="more_detail"
         >
         <v-img v-if="image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="200px" class="pa-3">
             <v-row
@@ -30,68 +31,81 @@
             </v-sheet>
             </v-row>    
         </v-img>
-        <div class="card-content">
+        <div class="card-content">  
             <div>
                 <v-card-title class ="pb-0">
                     {{title}}
                 </v-card-title>
-                    <v-card-text class="text--primary">
+                <v-card-text class="text--primary">
                     {{organizer}}
-                    </v-card-text>
+                    
+                </v-card-text>
             </div>
-            </div>
-            <v-divider></v-divider>
-            <div class="card-content2">
-                <p class="event-des ">Date: {{date}}</p>
-                <p class="event-des mb-3">Time: {{start_time_select}} - {{end_time_select}}</p>
-                <p class="event-des">Description:</p>
-                <p class="event-des mb-3">{{description}}</p>
-                <p class="event-des">Certificate: {{certificate}}</p>
-                <p class="event-des">Support: {{food_type}}</p>
-
+                <v-card class="icon-style" tile >
+                    <v-icon :color="(certificate == 'Have certificate')? '#83C4F3' : '#EAEAEA'">
+                        mdi-certificate-outline
+                    </v-icon>
+                    <v-icon :color="(food_type == '')? '#EAEAEA' : '#83C4F3' ">
+                        mdi-food
+                    </v-icon>
+                </v-card>             
             </div>
         </v-card>
-        <v-btn
-            end
-            large
-            color="primary"
-            class ="w-100 mt-2 " @click="signup">
-            Sign up
-        </v-btn>
-        </v-container>                    
+    </v-container>
 </template>
-
 <script>
+import axios from 'axios'
 export default {
-    data(){
-        return{
-            ...this.post
-        }
-    },
-    props:{
-        post:{
-            type:Object,
+
+    props: {
+        id:{
+            type:String,
             require:false
-        }
-    },
-    methods: {
-        signup(){
-        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()})
-        .then((res) => {
-            this.$router.push('/user/event/done')
-            const Swal = require('sweetalert2')
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Your account has been registered.',
-                })
-            })
+        },
+        title:{
+            type:String,
+            require:true
+        },
+        organizer:{
+            type:String,
+            require:true
+        },
+        image:{
+            type:String,
+            require:true
+        },
+        certificate:{
+            type:String,
+            require:false
+        },
+        food_type:{
+            type:String,
+            require:true
+        },
+        member_slot:{
+            type:String,
+            require:true
         },
     },
-}
-</script>
 
+    data:()=>({
+        loadData:[],
+
+    }),
+    methods: {
+
+        more_detail(){
+            this.$router.push('/event/card_event/'+this.id)
+        
+    },
+  }
+}
+
+</script>
 <style lang="scss" scoped>
+    .updatedColor{
+        color:#83C4F3;
+    }
     .v-card__title{
         font-size: 16px;
         color:#314F64;
@@ -106,17 +120,17 @@ export default {
     .card-content{
         display: flex;
         justify-content: space-between;
-        padding: 15px ; 
+        padding: 15px ;
+        
     }
     .v-card__title,.v-card__text{
         padding: 0px;
     }
-    .iconeiei{
+    .icon-style{
+        border-radius: 10px;
+        margin-top: auto;
         padding: 0px;
         box-shadow: none !important;
-    }
-    .mx-auto{
-        border-radius:10px;
     }
     .view-detail{
         font-size: 13px;
@@ -129,23 +143,8 @@ export default {
         position: absolute;
         bottom: 11px;
         right: 11px;
-
     }
     .v-card+.v-card{
         margin-top: 10px;
     }
-    .card-content2{
-        padding: 15px;
-        padding-bottom: 15px !important;
-        
-    }
-    .event-des{
-        font-size: 14px !important;
-        color:#314F64;
-        margin: 0px;
-    }
-
 </style>
-
-
-

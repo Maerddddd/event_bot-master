@@ -2,7 +2,7 @@
     <Detail :post="card_detail"/>
 </template>
 <script>
-    import Detail from '~/pages/user/event/compo/detail'
+    import Detail from '~/pages/event/card_event/detail'
     import axios from 'axios'
     export default {
         components:{

@@ -3,7 +3,8 @@ export const state = () => ({
   line: {
     pictureUrl: null,
     displayName: null,
-    userId: 'U933cc0e91e577c936856fac8f5612798'
+    userId: null,
+    // 'U933cc0e91e577c936856fac8f5612798'
     // เปลี่ยนเป็น null สำหรับใช้จริงนะจ๊ะ
   },
     dialog:{

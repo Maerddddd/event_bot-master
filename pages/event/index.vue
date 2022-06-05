@@ -1,70 +1,44 @@
 <template>
   <div>
-    <v-app-bar color ="#83C4F3"
-    flat
-    dense>
-    <v-toolbar-title>Select Event</v-toolbar-title>
-    </v-app-bar>
-    <v-container class ="pt-0 pb-0">
-        <v-row >
-            <v-col cols="12" >
-                <!-- <div class ="month-head">
-                  {{list.month}}
-                </div> -->
-                <card
-                v-for="item in list.sessions"
-                :session="item"
-                :month="month"
-                :key="item.id"/>
-                </v-col>
-        </v-row>
-    </v-container>
-  </div>
+        <v-app-bar color ="#83C4F3"
+        flat
+        dense>
+        <v-toolbar-title>Select Event</v-toolbar-title>
+        </v-app-bar>
+
+        <card_list :posts="loadData"/>
+
+</div>
 </template>
 <script>
-import card from '~/components/card'
+import card_list from '~/pages/event/card_event/card-list'
+import axios from 'axios'
 export default {
     components: {
-        card
+      card_list,
     },
   data() {
     return {
-        isShowDialog: false,
-        index: 0,
-        dialog: {
-            month:'',
-            img:'',
-            title:'',
-            organizer:'',
-            certificate:'',
-            food:'',
-            signer:'',
-            maxsigner:'',
-            
-      },
-      items: [0],
-        list: [],
-        event: this.$store.getters.getEvent
+      loadData:[]
     }
-  },
-  mounted(){
-    // api
-    this.list = this.event[0]
-    this.items= this.event.map((e)=> e.month)
   },
   methods: {
 
-  }
+  },
+  asyncData(context){
+    return axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
+    .then(res=>{
+      const data=[];
+      for(const key in res.data){
+        data.push({...res.data[key],id:key})
+      }
+      return {
+        loadData:data
+      }
+    });
+  },
 }
 </script>
 <style lang="scss" scoped>
-    .month-head{
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        color:#314F64;
-        font-size: 14px;
-        padding: 10px 0px;   
-    }
-
-</style>
+    
+</style>tn

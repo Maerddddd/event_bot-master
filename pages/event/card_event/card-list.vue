@@ -18,7 +18,7 @@
 </v-container>
 </template>
 <script>
-    import card from '~/pages/user/event/compo/card'
+    import card from '~/pages/event/card_event/card'
 export default {
     components:{
         card,
