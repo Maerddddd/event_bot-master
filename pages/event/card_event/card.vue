@@ -34,7 +34,7 @@
         <div class="card-content">  
             <div>
                 <v-card-title class ="pb-0">
-                    {{title}}
+                    {{title.slice(0,35)}}
                 </v-card-title>
                 <v-card-text class="text--primary">
                     {{organizer}}

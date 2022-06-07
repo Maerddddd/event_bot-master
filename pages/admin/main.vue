@@ -3,8 +3,8 @@
     <v-navigation-drawer
       app
       width="250"
-      fixed
-    >
+      absolute
+      >
       <v-sheet
         color="#83C4F3"
         class="pa-9"

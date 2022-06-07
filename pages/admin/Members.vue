@@ -17,213 +17,82 @@
             label="Search"
             single-line
             hide-details
+            outlined
+            dense
           ></v-text-field>
         </v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog
-          v-model="dialog"
-          max-width="600px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon
-              color="primary"
-              dark
-              class="mb-2"
-              v-bind="attrs"
-              v-on="on"
-            >
-              mdi-plus-box
-            </v-icon>
-          </template>
+
+        <v-dialog v-model="dialogDetail" max-width="1300px"> 
           <v-card>
-            <v-form>
-               <div class="title-card text-primary text-center">{{ formTitle }}</div>
-                <v-subheader>
-                    Event name:
-                  </v-subheader>
-                  <v-text-field
-                    color="#83C4F3"
-                    v-model="editedItem.title"
-                    outlined
-                    dense
-                  ></v-text-field>
-            
-                  <v-subheader>
-                    Organizer:
-                  </v-subheader>
-                  <v-text-field
-                    color="#83C4F3"
-                    v-model="editedItem.organizer"
-                    outlined
-                    dense
-                  ></v-text-field>
+            <v-card-title class="title-card text-primary text-center">Member Detail</v-card-title>
+            <v-container fluid>
+            <v-row>
+              <v-col>
+                        <!-- <div class="image">
+                          <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px"></v-img>
+                          <v-img v-else :src="editedItem.image" height="250px"></v-img>
+                        </div> -->
+                        <v-card-subtitle class="pt-5 pb-0 font_size_head">
+                          First name:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.firstname}}</div>
+                        </v-card-text>
 
-                  <v-subheader>
-                    Date:
-                  </v-subheader>
-                  <v-menu
-                    v-model="menu"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="editedItem.date"
-                        append-icon="mdi-calendar"
-                        readonly
-                        outlined
-                        dense
-                        v-bind="attrs"
-                        v-on="on"
-                        clearable
-                        @click:clear="editedItem.date = null"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="editedItem.date"
-                      :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                      min="1950-01-01"
-                      @change="menu = false"
-                      >
-                      
-                    </v-date-picker>
-                  </v-menu>
-                  <v-row>
-                  <v-col>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Last name:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.lastname}}</div>
+                        </v-card-text>
 
-                  <v-subheader>
-                    Start time:
-                  </v-subheader>
-                  <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.start_time_select"
-                    :items="start_time_select"
-                    dense
-                    outlined
-                  ></v-select>
-                  </v-col>
-                  <v-col>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Email:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div>{{editedItem.email}}</div>
+                        </v-card-text>
 
-                    <v-subheader>
-                    End time:
-                  </v-subheader>
-                  <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.end_time_select"
-                    :items="end_time_select"
-                    dense
-                    outlined
-                  ></v-select>
-                  </v-col>
-                  </v-row>
-                  
-                  <v-subheader>
-                    Event description:
-                  </v-subheader>
-                  <v-textarea
-                    v-model="editedItem.description"
-                    color="#83C4F3"
-                    outlined
-                    dense
-                  >
-                  </v-textarea>
-                    
-                    <v-subheader>
-                    Certificate:
-                    </v-subheader>
-                    <v-radio-group
-                      v-model="certificate"
-                      row
-                    >
-                      <v-radio
-                        color="#83C4F3"
-                        label="Have certificate"
-                        value="Have certificate"
-                      ></v-radio>
-                      <v-radio
-                        color="#83C4F3"
-                        label="No certificate"
-                        value="No certificate"
-                      ></v-radio>
-                      
-                    </v-radio-group>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          PhoneNumber:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div class="font_size">{{editedItem.phonenumber}}</div>
+                        </v-card-text>
 
-                    <v-subheader>
-                    Support:
-                    </v-subheader>
-                    <v-checkbox
-                      v-model="food"
-                      value="Yes"
-                      color="#83C4F3"
-                      label="Food"
-                      hide-details
-                    ></v-checkbox>
-                    <v-select
-                    :disabled="!food"
-                    v-model="editedItem.food_type"
-                    :items ="food_type"
-                    color="#83C4F3"
-                    outlined
-                    dense
-                    class="mt-3"
-                    ></v-select>
-                    
-                    <v-subheader>
-                    จำนวนคนที่เปิดรับ:
-                    </v-subheader>
-                    <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.num"
-                    :items="num"
-                    dense
-                    outlined
-                  ></v-select>
-            </v-form>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="close"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="save"
-              >
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="title-card text-primary text-center">Are you sure you want to delete this item?</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                          Date of birth:
+                        </v-card-subtitle>
+                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                          <div class="font_size">{{editedItem.dateofbirth}}</div>
+                        </v-card-text>
+              </v-col>
+              <v-divider vertical></v-divider>
+              <v-col cols="6">
+                <v-data-table
+                :headers="headers2"
+                :items="editedItem.events"
+                :search="search"
+                sort-by="title"
+                class="elevation-0">
+                </v-data-table>
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDetail">OK</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
     <v-btn
       elevation="0"
       small
-      
+      @click="moredetailItem(item)"
     >
       More Details
     </v-btn>
@@ -232,6 +101,7 @@
       <v-btn
         color="primary"
         @click="initialize"
+        outlined
       >
         Reset
       </v-btn>
@@ -239,23 +109,10 @@
   </v-data-table>
 </template>
 <script>
-import { format, parseISO } from 'date-fns'
   export default {
     data: () => ({
-        certificate: null,
-        food_type: ['อาหารกลางวัน','อาหารว่าง','อาหารกลางวันและอาหารว่าง'],
-        checkbox: false,
-        food: false,
-        start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-        end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-        num: ['10','20','30','40','50'],
-        certificate: ['Have certificate','No certificate'],
-        date: null,
-        menu: false,
-
       search: '',
-      dialog: false,
-      dialogDelete: false,
+      dialogDetail: false,
       headers: [
         {
           text: 'Firstname',
@@ -269,46 +126,45 @@ import { format, parseISO } from 'date-fns'
         { text: 'Date of birth', value: 'dateofbirth'},
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      headers2: [
+        {
+          text: 'Title',
+          align: 'start',
+          sortable: false,
+          value: 'title',
+        },
+        { text: 'Organizer', value: 'organizer' },
+        { text: 'Date', value: 'date' },
+        { text: 'Start Time', value: 'start_time_select'},
+        { text: 'End Time', value: 'end_time_select' },
+      ],
       member_data: [],
       editedIndex: -1,
       editedItem: {
-        title:'',
-        organizer:'',
+        firtname:'',
+        lastname:'',
         date:'',
-        start_time_select:'',
-        end_time_select:'',
-        description:'',
-        num:'',
-        certificate:'',
-        food_type:'',
-        food:'',
+        email:'',
+        phonenumber:'',
+
       },
       defaultItem: {
-        title:'',
-        organizer:'',
+        firtname:'',
+        lastname:'',
         date:'',
-        start_time_select:'',
-        end_time_select:'',
-        description:'',
-        num:'',
-        certificate:'',
-        food_type:'',
-        food:'',
+        email:'',
+        phonenumber:'',
+
       },
     }),
 
     computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
+
     },
 
     watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
+      dialogDetail (val) {
+        val || this.closeDetail()
       },
     },
 
@@ -318,57 +174,51 @@ import { format, parseISO } from 'date-fns'
 
     methods: {
       async initialize () {
-        let res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
-        this.member_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
+        // let res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
+        // this.member_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
+
+        let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
+        let select_events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json")
+        let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
+        // const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
+        // const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
+        const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue }))
         
+        this.member_data = entries_members.map(e => {
+            return {
+                ...e,
+                events : Object.entries(select_events.data[e.id]).map(([eventId,value]) => events.data[eventId])
+            }
+        })
+        console.log(this.member_data);
       },
 
-      editItem (item) {
-        this.editedIndex = this.member_data.indexOf(item)
-        // console.log(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.member_data.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.$axios.delete(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.member_data[this.editedIndex].id}.json`)
-        this.member_data.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },
-
-      close () {
-        this.dialog = false
+       closeDetail() {
+        this.dialogDetail = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
         })
       },
 
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.member_data[this.editedIndex], this.editedItem)
-          this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.member_data[this.editedIndex].id}.json`,this.editedItem)
-          console.log(this.editedItem)
-        } else {
-          this.member_data.push(this.editedItem)
-          this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`,this.editedItem)
-        }
-        this.close()
+      moredetailItem(item){
+        this.editedIndex = this.member_data.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialogDetail = true
       },
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.font_size_normal{ 
+  font-size: 16px !important;
+}
+.font_size_head{ 
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.6);
+}
+.image{
+  padding: 0px 17px !important;
+}
+</style>

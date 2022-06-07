@@ -17,6 +17,8 @@
             label="Search"
             single-line
             hide-details
+            dense
+            outlined
           ></v-text-field>
         </v-toolbar-title>
         <v-divider
@@ -293,9 +295,7 @@
                 :search="search"
                 sort-by="title"
                 class="elevation-0">
-                <!-- <p>{{editedItem.members}}</p> -->
                 </v-data-table>
-                <!-- <p>{{}}</p> -->
               </v-col>
             </v-row>
           </v-container>
@@ -371,7 +371,6 @@ import { format, parseISO } from 'date-fns'
         menu: false,
         certificate: null,
 
-
       search: '',
       dialog: false,
       dialogDelete: false,
@@ -430,7 +429,6 @@ import { format, parseISO } from 'date-fns'
         { text: 'Phone Number', value: 'phonenumber' },
         { text: 'Date of birth', value: 'dateofbirth'},
       ],
-      member_select_event_data: [],
       }
       
     },
@@ -458,12 +456,6 @@ import { format, parseISO } from 'date-fns'
       await this.initialize()
     },
 
-    // methods: {
-    //   async initialize () {
-    //     let res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
-    //     this.event_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
-    //   },
-    
     methods: {
       async initialize () {
         let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
@@ -472,7 +464,7 @@ import { format, parseISO } from 'date-fns'
         const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
         const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
         const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue }))
-
+        
         this.event_data = entries_events.map(e => {
             return {
                 ...e,
@@ -481,6 +473,7 @@ import { format, parseISO } from 'date-fns'
                 .map(se => ({...entries_members.find(e => e.id == se.id) , time_stamp: se[e.id].time_stamp , }))
             }
         })
+        // console.log(this.event_data);
       },
 
       editItem (item) {
@@ -539,7 +532,6 @@ import { format, parseISO } from 'date-fns'
       moredetailItem(item){
         this.editedIndex = this.event_data.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        // this.$router.push(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`,this.editedItem)
         this.dialogDetail = true
       },
     },
