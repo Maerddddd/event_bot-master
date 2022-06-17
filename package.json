@@ -9,12 +9,18 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@line/bot-sdk": "^7.5.0",
     "@nuxtjs/axios": "^5.13.6",
+    "axios": "^0.27.2",
+    "chart.js": "^3.8.0",
     "core-js": "^3.19.3",
     "date-fns": "^2.28.0",
+    "dotenv": "^16.0.1",
+    "hchs-vue-charts": "^1.2.8",
     "nuxt": "^2.15.8",
     "sweetalert2": "^11.4.17",
     "vue": "^2.6.14",
+    "vue-chartjs": "^4.1.1",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "vuetify": "^2.6.1",

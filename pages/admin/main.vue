@@ -58,7 +58,7 @@
              align="start"
              v-if="state_tab==1"
              >
-            Dashboard
+            <dashboard/>
           </v-col>
           <v-col 
             cols="12"
@@ -87,6 +87,7 @@
 <script>
 import member_crud from '~/pages/admin/Members'
 import event_crud from '~/pages/admin/EventCRUD'
+import dashboard from '~/pages/admin/dashboard'
   export default {
     data: () => ({
       selectedItem: 0,
@@ -99,6 +100,7 @@ import event_crud from '~/pages/admin/EventCRUD'
     components:{ 
           member_crud,
           event_crud,
+          dashboard,
           
         },
     methods: {

@@ -3,7 +3,6 @@
     :headers="headers"
     :items="member_data"
     :search="search"
-    sort-by="calories"
     class="elevation-0"
   >
     <template v-slot:top>
@@ -88,7 +87,7 @@
     </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
     <v-btn
       elevation="0"
       small
@@ -190,7 +189,7 @@
                 events : Object.entries(select_events.data[e.id]).map(([eventId,value]) => events.data[eventId])
             }
         })
-        console.log(this.member_data);
+        // console.log(this.member_data);
       },
 
        closeDetail() {
