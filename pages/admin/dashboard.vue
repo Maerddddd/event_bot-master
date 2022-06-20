@@ -25,7 +25,7 @@
       <v-row>
         <v-col>
           <div>
-  
+            <zaza/>
           </div>
         </v-col>
       </v-row>
@@ -35,12 +35,12 @@
 
 <script>
 import CardBox from "~/components/CardBox";
-
-
+import zaza from "~/pages/admin/chart";
 
 export default {
   components: {
-    CardBox
+    CardBox,
+    zaza
   },
   data() {
     return {

@@ -414,11 +414,10 @@ import { format, parseISO } from 'date-fns'
         member_slot:'',
         food_type:'',
         certificate:'',
-        
       },
 
-      headers2: [
-        {
+      headers2: [      
+        { 
           text: 'Firstname',
           align: 'start',
           sortable: false,
@@ -430,7 +429,6 @@ import { format, parseISO } from 'date-fns'
         { text: 'Date of birth', value: 'dateofbirth'},
       ],
       }
-      
     },
 
 
@@ -458,6 +456,7 @@ import { format, parseISO } from 'date-fns'
 
     methods: {
       async initialize () {
+        
         let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
         let select_events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json")
         let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")

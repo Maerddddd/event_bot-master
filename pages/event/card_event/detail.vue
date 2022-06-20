@@ -76,15 +76,19 @@ export default {
     },
     methods: {
         signup(){
+            liff.init({
+                liffId: '1657115807-gN69lN61'
+                }).then(() => {
+                liff.sendMessages([
+                    {
+                      type: "text",
+                      text: "เข้าร่วมกิจกรรมแล้ว",
+                    },
+                  ])
+                })
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()})
         .then((res) => {
-            this.$router.push('/event/done')
-            const Swal = require('sweetalert2')
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Your account has been registered.',
-                })
+            this.$router.push('/event/noti')
             })
         },
     },

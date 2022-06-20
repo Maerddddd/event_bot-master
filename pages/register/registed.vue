@@ -97,7 +97,16 @@
                 this.$router.push('/register')
                 },
             register(){
-
+                    liff.init({
+                    liffId: '1657115807-gN69lN61'
+                    }).then(() => {
+                    liff.sendMessages([
+                        {
+                        type: "text",
+                        text: "ลงทะเบียน",
+                        },
+                    ])
+                    })
                     this.$store.dispatch('setRegister', this.form)
                     this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}.json`, this.$store.getters.getRegister)
                     .then((res) => {

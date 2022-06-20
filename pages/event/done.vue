@@ -40,13 +40,11 @@
 export default {  
   data(){
     return {
-      name: this.$store.getters.getRegister.firstname
+      
     }
   },
   computed: {
-      getLine(){
-              return this.$store.getters.getLine;      
-              }
+
           },
   methods: {
     selectevent(){
@@ -59,7 +57,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
-    
 
 </style>

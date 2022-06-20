@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+// import serveStatic from 'serve-static'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -46,6 +47,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -75,6 +77,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['vue-chartjs','chart.js'],    
+  },
+  // serverMiddleware: [
+  //   // Will register redirect-ssl npm package
+  //   'redirect-ssl',
 
-  }
+  //   // Will register file from project server-middleware directory to handle /server-middleware/* requires
+  //   { path: '/server-middleware', handler: '~/server-middleware/index.js' },
+
+  //   // We can create custom instances too
+  //   { path: '/static2', handler: serveStatic(__dirname + '/static2') }
+  // ]
 }
