@@ -105,12 +105,29 @@
                         type: "text",
                         text: "ลงทะเบียน",
                         },
-                    ])
+                        ])
                     })
                     this.$store.dispatch('setRegister', this.form)
-                    this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}.json`, this.$store.getters.getRegister)
+                    this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister)
                     .then((res) => {
                         this.$router.push('/register/done')
+                        // const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
+                        // const LINE_HEADER = {
+                        // 'Content-Type': 'application/json',
+                        // 'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
+                        // };
+                        // this.$axios.post(LINE_MESSAGING_API)
+                        // headers: LINE_HEADER,
+                        // body: JSON.stringify({
+                        // replyToken: bodyResponse.events[0].replyToken,
+                        // messages: [
+                        //     {
+                        //     type: `text`,
+                        //     text: bodyResponse.events[0].message.text
+                        //     }
+                        // ]
+                        // })
+
                     })
                 // this.$store.dispatch('setRegister', this.form)
                 // // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister).then((res) => {

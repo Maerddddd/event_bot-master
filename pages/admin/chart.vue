@@ -49,45 +49,26 @@ export default {
     plugins: {
       type: Object,
       default: () => {}
-    }
+    },
+    data: {
+      type: Object,
+      required: true
+    },
   },
   data() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March', '1', '2', '3' ],
-        datasets: [ { data: [40, 20, 12 , 12, 12, 12, 12] } ]
+        labels: Object.keys(this.data),
+        datasets: [ { 
+          data: Object.values(this.data),
+          label: "คน"
+          } 
+        ]
       },
       chartOptions: {
         responsive: true
       }
     }
   },
-
-  async created () {
-      await this.initialize()
-    },
-
-  methods: {
-      async initialize () {
-
-        let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
-        let select_events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json")
-        let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
-        const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
-        const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
-        const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue }))
-        
-        this.event_data = entries_events.map(e => {
-            return {
-                ...e,
-                members : entries_select_event
-                .filter(se =>  e.id in se)
-                .map(se => ({...entries_members.find(e => e.id == se.id) , time_stamp: se[e.id].time_stamp , }))
-                
-            }
-        })
-
-      },
-  }
 }
 </script>

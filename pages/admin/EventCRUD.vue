@@ -462,7 +462,7 @@ import { format, parseISO } from 'date-fns'
         let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
         const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
         const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
-        const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue }))
+        const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue.profile }))
         
         this.event_data = entries_events.map(e => {
             return {

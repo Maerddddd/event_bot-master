@@ -86,7 +86,7 @@ export default {
                     },
                   ])
                 })
-        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/select_events/${this.$store.getters.getLine.userId}/${this.id}.json`,{time_stamp:new Date()})
+        this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/select_events/${this.id}.json`,{time_stamp:new Date()})
         .then((res) => {
             this.$router.push('/event/noti')
             })

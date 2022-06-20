@@ -25,7 +25,7 @@
       <v-row>
         <v-col>
           <div>
-            <zaza/>
+            <zaza v-if = "!!chart_data" :data= "chart_data" />
           </div>
         </v-col>
       </v-row>
@@ -54,10 +54,16 @@ export default {
 
     methods: {
       async initialize () {
+        
         let members = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
         let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
         this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
         this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
+        this.chart_data = Object.fromEntries(this.event_data.map(e => {
+          return [e.title,e.members?.length || 0]
+        }));
+        // console.log(this.chart_data);
+
       },
     },
     

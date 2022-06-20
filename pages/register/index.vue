@@ -164,7 +164,7 @@
                     },
         methods: {
             isDone(){
-                this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}.json`).then((res) => {
+                this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`).then((res) => {
                     if(res.data != null){
                     this.$router.push('/register/done');
                     }
