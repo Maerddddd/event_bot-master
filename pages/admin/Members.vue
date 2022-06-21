@@ -177,19 +177,17 @@
         // this.member_data =  Object.entries(res.data).map(([key,value]) => ({id: key , ...value }))
 
         let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
-        let select_events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/select_events.json")
         let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
-        // const entries_select_event = Object.entries(select_events.data).map(([userId, userValue]) => ({id : userId, ...userValue }))
-        // const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
+
         const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue.profile }))
-        
+        // console.log("entries_members",entries_members)
         this.member_data = entries_members.map(e => {
             return {
                 ...e,
-                events : Object.entries(select_events.data[e.id]).map(([eventId,value]) => events.data[eventId])
+                events : Object.entries(members.data[e.id]?.select_events || {} ).map((e) => events.data[e[0]])
             }
         })
-        // console.log(this.member_data);
+
       },
 
        closeDetail() {

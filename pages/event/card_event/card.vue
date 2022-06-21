@@ -27,7 +27,7 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2">0 / {{member_slot}}</span>
+                <span class="subheading pa-2">{{member.length}} / {{member_slot}}</span>
             </v-sheet>
             </v-row>    
         </v-img>
@@ -83,6 +83,10 @@ export default {
             require:true
         },
         member_slot:{
+            type:String,
+            require:true
+        },
+        member:{
             type:String,
             require:true
         },

@@ -1,57 +1,16 @@
-// const functions = require("firebase-functions");
-
-// exports.LineBot = functions.https.onRequest((request, response) => {
-//   response.send("Hello from Firebase!");
-  
-// });
-
-const functions = require('firebase-functions');
-const request = require('request-promise');
-
-const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
-const LINE_HEADER = {
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
-};
-
-exports.LineBot = functions.https.onRequest((req, res) => {
-  if (req.body.events[0].message.type !== 'text') {
-    return;
-  }
-  reply(req.body);
-});
-
-const reply = (bodyResponse) => {
-  return request({
-    method: `POST`,
-    uri: `${LINE_MESSAGING_API}/reply`,
-    headers: LINE_HEADER,
-    body: JSON.stringify({
-      replyToken: bodyResponse.events[0].replyToken,
-      messages: [
-        {
-          type: `text`,
-          text: bodyResponse.events[0].message.text
-        }
-	  ]
-    })
-  });
-};
-
-
 // const functions = require('firebase-functions');
 // const request = require('request-promise');
 
 // const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
 // const LINE_HEADER = {
 //   'Content-Type': 'application/json',
-//   'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
+//   'Authorization': `Bearer xxxxx`
 // };
 
 // exports.LineBotPush = functions.https.onRequest((req, res) => {
 //   return request({
 //     method: `GET`,
-//     uri: `https://api.openweathermap.org/data/2.5/weather?units=metric&type=accurate&zip=10330,th&appid=98f0b338100fb455c54433f0bc54057c`,
+//     uri: `https://api.openweathermap.org/data/2.5/weather?units=metric&type=accurate&zip=10330,th&appid=yyyyy`,
 //     json: true
 //   }).then((response) => {
 //     const message = `City: ${response.name}\nWeather: ${response.weather[0].description}\nTemperature: ${response.main.temp}`;
@@ -67,7 +26,7 @@ const reply = (bodyResponse) => {
 //     uri: `${LINE_MESSAGING_API}/push`,
 //     headers: LINE_HEADER,
 //     body: JSON.stringify({
-//       to: `U933cc0e91e577c936856fac8f5612798`,
+//       to: `zzzzz`,
 //       messages: [
 //         {
 //           type: `text`,
@@ -81,4 +40,3 @@ const reply = (bodyResponse) => {
 //     return Promise.reject(error);
 //   });
 // }
-

@@ -23,10 +23,25 @@
       </v-row>
 
       <v-row>
-        <v-col>
-          <div>
-            <zaza v-if = "!!chart_data" :data= "chart_data" />
-          </div>
+
+        <v-col cols="8">
+          <v-card elevation="0" class="pa-5">
+            <BarChart v-if = "loaded" :data= "chart_data" />
+          </v-card>
+        </v-col>
+
+        <v-col cols="4">
+          <v-card elevation="0"
+           height="400px"
+           class="pa-5">
+        
+            <CardData 
+              v-for="n in 3"
+              :key="n"
+            />
+
+          </v-card>
+          <div>{{this.chart_data}}</div>
         </v-col>
       </v-row>
     </v-container>
@@ -35,39 +50,63 @@
 
 <script>
 import CardBox from "~/components/CardBox";
-import zaza from "~/pages/admin/chart";
+import CardData from "~/components/CardData";
+import BarChart from "~/pages/admin/chart";
 
 export default {
   components: {
     CardBox,
-    zaza
+    CardData,
+    BarChart,
   },
   data() {
     return {
+      loaded: false,
       member_data: [],
       event_data: [],
+      chart_data: null
     };
   },
-   async created () {
-      await this.initialize()
-    },
+  //  async created () {
+  //     await this.initialize()
+  //   },
 
-    methods: {
-      async initialize () {
+  //   methods: {
+  //     async initialize () {
+  //       this.loaded = false
+  //       let members = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
+  //       let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
+  //       this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
+  //       this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
+  //       this.chart_data = Object.fromEntries(this.event_data.map(e => {
+  //         return [e.title,[e.member]?.length || 0]
+          
+  //         // ?.length || 0
+  //       }));
         
-        let members = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
-        let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
-        this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
-        this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
-        this.chart_data = Object.fromEntries(this.event_data.map(e => {
-          return [e.title,e.members?.length || 0]
-        }));
-        // console.log(this.chart_data);
+  //       // console.log(this.event_data);
+  //     },
+  //   },
+  
+    async mounted () {
+      this.loaded = false
 
-      },
-    },
+      try {
+        this.loaded = false
+          let members = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
+          let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
+          this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
+          this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
+          this.chart_data = Object.fromEntries(this.event_data.map(e => {
+            return [e.title,[e.member]?.length || 0]
+            // []?.length || 0
+          }));
+
+        this.loaded = true
+      } catch (e) {
+        console.error(e)
+      }
+      }
     
 };
 </script>
-
-<style></style>

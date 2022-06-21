@@ -1,4 +1,5 @@
 <template>
+<div>
   <Bar
     :chart-options="chartOptions"
     :chart-data="chartData"
@@ -10,12 +11,13 @@
     :width="width"
     :height="height"
   />
+  </div>
 </template>
 
 <script>
-
 import { Bar } from 'vue-chartjs/legacy'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
@@ -32,11 +34,11 @@ export default {
     },
     width: {
       type: Number,
-      default: 300
+      default: 800
     },
     height: {
       type: Number,
-      default: 100
+      default: 400
     },
     cssClasses: {
       default: '',
@@ -59,16 +61,20 @@ export default {
     return {
       chartData: {
         labels: Object.keys(this.data),
-        datasets: [ { 
+        datasets: [ {
           data: Object.values(this.data),
-          label: "คน"
-          } 
-        ]
+          label: "Member",
+          backgroundColor: '#83C4F3',
+
+          }
+          ]
       },
       chartOptions: {
         responsive: true
       }
     }
-  },
+  }
 }
 </script>
+
+
