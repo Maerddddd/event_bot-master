@@ -47,7 +47,7 @@
       >
       <v-row class ="headbar">
         <v-spacer></v-spacer>
-        <v-text class="pr-2">Admin</v-text>
+        <p class="pr-2">Admin</p>
         <v-icon @click="logout">mdi-logout</v-icon>
       </v-row>
         <v-row>

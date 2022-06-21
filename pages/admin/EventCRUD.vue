@@ -3,7 +3,6 @@
     :headers="headers"
     :items="event_data"
     :search="search"
-    sort-by="title"
     class="elevation-0"
   >
     <template v-slot:top>
