@@ -1,6 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
 // import serveStatic from 'serve-static'
 
+// module.exports = {
+//   mode: 'universal',
+//   router: {
+//     middleware : 'line.js'
+//   }
+// }
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

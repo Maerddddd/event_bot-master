@@ -34,14 +34,12 @@
           <v-card elevation="0"
            height="400px"
            class="pa-5">
-        
             <CardData 
-              v-for="n in 3"
+              v-for="(items,n) in cardData"
               :key="n"
+              :data= "items"
             />
-
           </v-card>
-          <div>{{this.chart_data}}</div>
         </v-col>
       </v-row>
     </v-container>
@@ -64,30 +62,10 @@ export default {
       loaded: false,
       member_data: [],
       event_data: [],
-      chart_data: null
+      chart_data: null,
+      cardData: [],
     };
   },
-  //  async created () {
-  //     await this.initialize()
-  //   },
-
-  //   methods: {
-  //     async initialize () {
-  //       this.loaded = false
-  //       let members = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members.json`)
-  //       let events = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`)
-  //       this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
-  //       this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
-  //       this.chart_data = Object.fromEntries(this.event_data.map(e => {
-  //         return [e.title,[e.member]?.length || 0]
-          
-  //         // ?.length || 0
-  //       }));
-        
-  //       // console.log(this.event_data);
-  //     },
-  //   },
-  
     async mounted () {
       this.loaded = false
 
@@ -98,10 +76,16 @@ export default {
           this.member_data =  Object.entries(members.data).map(([key,value]) => ({id: key , ...value }))
           this.event_data =  Object.entries(events.data).map(([key,value]) => ({id: key , ...value }))
           this.chart_data = Object.fromEntries(this.event_data.map(e => {
-            return [e.title,[e.member]?.length || 0]
-            // []?.length || 0
+            
+            let count = 0
+            if (e.member!= null) {
+              Object.entries(e.member).forEach( element => count++)
+            }
+            this.cardData.push({title: e.title , count: count})
+            return [e.title,count]
+            
           }));
-
+        // console.log(this.chart_data);
         this.loaded = true
       } catch (e) {
         console.error(e)

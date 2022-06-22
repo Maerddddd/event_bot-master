@@ -176,6 +176,7 @@ export default {
                 title: 'Success',
                 text: 'Your account has been registered.',
                 })
+
             // const functions = require('firebase-functions');
             // const request = require('request-promise');
             // const functions = 'firebase-functions';
@@ -186,7 +187,7 @@ export default {
             //             'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
             //             };
 
-            // exports.LineBotPush = functions.https.onRequest((req, res) => {
+            // exports.LineBotPush = https.onRequest((req, res) => {
             // return request({
             // method: `GET`,
             // uri: `https://api.openweathermap.org/data/2.5/weather?units=metric&type=accurate&zip=10330,th&appid=98f0b338100fb455c54433f0bc54057c`,
@@ -213,12 +214,8 @@ export default {
             //         text: msg
             //     }
             //     ]
+            //     })
             // })
-            // }).then(() => {
-            // return res.status(200).send(`Done`);
-            // }).catch((error) => {
-            // return Promise.reject(error);
-            // });
             // }
 
 
