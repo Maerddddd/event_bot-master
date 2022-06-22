@@ -11,7 +11,9 @@
                 :certificate="post.certificate"
                 :food_type="post.food_type"
                 :member_slot="post.member_slot"
+                :countMember="('member' in post)? Object.keys(post.member).length : 0"
                 :key="post.id"
+                
             />
         </v-col>
     </v-row>
@@ -27,7 +29,7 @@ export default {
         posts:{
             type:Array,
             require:true
-        }
+        },
     },
 }
     

@@ -400,7 +400,6 @@ import { format, parseISO } from 'date-fns'
         member_slot:'',
         food_type:'',
         certificate:'',
-        member:[],
         
       },
       defaultItem: {

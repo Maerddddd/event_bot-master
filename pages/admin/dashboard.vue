@@ -32,7 +32,6 @@
 
         <v-col cols="4">
           <v-card elevation="0"
-           height="400px"
            class="pa-5">
             <CardData 
               v-for="(items,n) in cardData"

@@ -4,6 +4,7 @@
       app
       width="250"
       absolute
+      fixed
       >
       <v-sheet
         color="#83C4F3"
@@ -27,7 +28,6 @@
                 v-for="(item,index) in nav_list"
                 :key="item.title"
                 @click="link(index+1)"
-                
                 >
                 <v-list-item-icon>
                     <v-icon >{{ item.icon }}</v-icon>
@@ -47,7 +47,7 @@
       >
       <v-row class ="headbar">
         <v-spacer></v-spacer>
-        <p class="pr-2">Admin</p>
+        <p class="pr-2 ma-auto">Admin</p>
         <v-icon @click="logout">mdi-logout</v-icon>
       </v-row>
         <v-row>

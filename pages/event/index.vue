@@ -13,13 +13,14 @@
 <script>
 import card_list from '~/pages/event/card_event/card-list'
 import axios from 'axios'
+import { fetch } from 'node-fetch'
 export default {
     components: {
       card_list,
     },
   data() {
     return {
-      loadData:[]
+      loadData:[],
     }
   },
   methods: {
@@ -41,4 +42,4 @@ export default {
 </script>
 <style lang="scss" scoped>
     
-</style>tn
+</style>

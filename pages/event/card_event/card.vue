@@ -14,10 +14,11 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2">0 / {{member_slot}}</span>
+                <span class="subheading pa-2">{{countMember}} / {{member_slot}}</span>
             </v-sheet>
             </v-row>
         </v-img>
+
         <v-img v-else :src="image" height="200px" class="pa-3">
             <v-row
             align="center"
@@ -27,10 +28,11 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2">{{member.length}} / {{member_slot}}</span>
+                <span class="subheading pa-2"> {{countMember}} / {{member_slot}}</span>
             </v-sheet>
             </v-row>    
         </v-img>
+
         <div class="card-content">  
             <div>
                 <v-card-title class ="pb-0">
@@ -54,7 +56,6 @@
     </v-container>
 </template>
 <script>
-import axios from 'axios'
 export default {
 
     props: {
@@ -86,23 +87,17 @@ export default {
             type:String,
             require:true
         },
-        member:{
-            type:String,
-            require:true
-        },
+        countMember : {
+            type : Number,
+            default : 0
+        }
     },
 
-    data:()=>({
-        loadData:[],
-
-    }),
     methods: {
-
         more_detail(){
             this.$router.push('/event/card_event/'+this.id)
-        
     },
-  }
+  },
 }
 
 </script>
