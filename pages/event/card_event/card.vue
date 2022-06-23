@@ -14,7 +14,7 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2">{{countMember}} / {{member_slot}}</span>
+                <span class="subheading pa-2">{{countMember}} / {{maximun_member}}</span>
             </v-sheet>
             </v-row>
         </v-img>
@@ -28,7 +28,7 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2"> {{countMember}} / {{member_slot}}</span>
+                <span class="subheading pa-2"> {{countMember}} / {{maximun_member}}</span>
             </v-sheet>
             </v-row>    
         </v-img>
@@ -47,7 +47,7 @@
                     <v-icon :color="(certificate == 'Have certificate')? '#83C4F3' : '#EAEAEA'">
                         mdi-certificate-outline
                     </v-icon>
-                    <v-icon :color="(food_type == '')? '#EAEAEA' : '#83C4F3' ">
+                    <v-icon :color="(food == 'Food' || other_box == 'Other' || souvenir == 'Souvenir' )? '#83C4F3' : '#EAEAEA' ">
                         mdi-food
                     </v-icon>
                 </v-card>             
@@ -79,18 +79,31 @@ export default {
             type:String,
             require:false
         },
-        food_type:{
+        food:{
             type:String,
             require:true
         },
-        member_slot:{
+        souvenir:{
+            type:String,
+            require:true
+        },
+        other:{
+            type:String,
+            require:true
+        },
+        maximun_member:{
             type:String,
             require:true
         },
         countMember : {
             type : Number,
             default : 0
-        }
+        },
+        other_box:{
+            type:String,
+            require:true
+        },
+
     },
 
     methods: {

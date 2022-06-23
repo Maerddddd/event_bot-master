@@ -14,7 +14,7 @@
                 rounded="xl"
             >
             
-                <span class="subheading pa-2">{{(typeof member == 'undefined')? '0' : Object.keys(member).length }} / {{member_slot}}</span>
+                <span class="subheading pa-2">{{(typeof member == 'undefined')? '0' : Object.keys(member).length }} / {{maximun_member}}</span>
             </v-sheet>
             </v-row>
         </v-img>
@@ -27,7 +27,7 @@
             <v-sheet
                 rounded="xl"
             >
-                <span class="subheading pa-2">{{(typeof member == 'undefined')? '0' : Object.keys(member).length   }}/ {{member_slot}}</span>
+                <span class="subheading pa-2">{{(typeof member == 'undefined')? '0' : Object.keys(member).length   }}/ {{maximun_member}}</span>
             </v-sheet>
             </v-row>    
         </v-img>
@@ -43,14 +43,23 @@
             </div>
             <v-divider></v-divider>
             <div class="card-content2">
-                <p class="event-des ">Date: {{date}}</p>
-                <p class="event-des mb-3">Time: {{start_time_select}} - {{end_time_select}}</p>
-                <v-divider></v-divider>
-                <p class="event-des mt-3">Description:</p>
-                <p class="event-des mb-3">{{description}}</p>
-                <v-divider></v-divider>
-                <p class="event-des mt-3">Certificate: {{certificate}}</p>
-                <p class="event-des">Support: {{food_type}}</p>
+                <v-card-text>
+                    <span class="event-des ">Date: </span>{{date}}
+                </v-card-text>
+                <v-card-text class="mb-3">
+                    <span class="event-des ">Time: </span>{{start_time_select}} - {{end_time_select}}
+                </v-card-text>
+                <v-divider class="mb-3"></v-divider>
+                <v-card-text class="mb-3">
+                    <span class="event-des ">Description: </span>{{description}}
+                </v-card-text>
+                <v-divider class="mb-3"></v-divider>
+                <v-card-text>
+                    <span class="event-des ">Certificate: </span>{{certificate}}
+                </v-card-text>
+                <v-card-text>
+                    <span class="event-des ">Support: </span>{{food}} {{souvenir}} {{other}}
+                </v-card-text>
 
             </div>
         </v-card>
@@ -63,7 +72,7 @@
             <v-container >
             <v-row >
                 <v-col class="pb-0 pt-4" cols="9">
-                    <p class="d-flex align-center ma-0">Notification Setting</p>
+                    <p class="d-flex align-center ma-0 mt-1 event-des ">Notification Setting</p>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col class="pb-0">
@@ -76,22 +85,25 @@
                 </v-col>
             </v-row>
         </v-container>
-         <v-banner
-            v-model="switch1"
-            single-line
-            transition="slide-y-transition"
-            >
-            <v-select
-                :items="items"
-                :disable="!switch1"
-                v-model="noti_data.time_set"
-                dense
-                outlined
-                flat
-                label="Time Set"
-                class="pa-1"
-            ></v-select>
-        </v-banner>
+            <div class="banner">
+            <v-banner
+                v-model="switch1"
+                single-line
+                transition="slide-y-transition"
+                >
+                <v-select
+                    :items="items"
+                    :disable="!switch1"
+                    v-model="noti_data.time_set"
+                    dense
+                    outlined
+                    flat
+                    label="Time Set"
+                    class="pa-1"
+                ></v-select>
+            </v-banner>
+            </div>
+         
         </div>
         </v-card>
 
@@ -137,16 +149,16 @@ export default {
             }
         },
         signup(){
-            // liff.init({
-            //     liffId: '1657115807-gN69lN61'
-            //     }).then(() => {
-            //     liff.sendMessages([
-            //         {
-            //           type: "text",
-            //           text: "เข้าร่วมกิจกรรมแล้ว",
-            //         },
-            //       ])
-            //     })
+            liff.init({
+                liffId: '1657115807-gN69lN61'
+                }).then(() => {
+                liff.sendMessages([
+                    {
+                      type: "text",
+                      text: "ลงชื่อร่วมกิจกรรมแล้ว",
+                    },
+                  ])
+                })
         // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.id}/member.json`, this.$store.getters.getLine.userId )
 
         // this.$axios.post('https://api.line.me/v2/bot/message/push',{ 
@@ -161,7 +173,6 @@ export default {
 
         this.userlineId[this.$store.getters.getLine.userId] = 0 
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.id}/member.json`, this.userlineId )
-        
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/select_events/${this.id}.json`,{time_stamp:new Date()})
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/select_events/${this.id}/noti.json`,this.noti_data)
         .then((res) => {
@@ -230,6 +241,9 @@ export default {
         font-size: 14px !important;
         color:#314F64;
         margin: 0px;
+    }
+    .banner{
+        padding: 0px 12px;
     }
 
 </style>

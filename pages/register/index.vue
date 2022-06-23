@@ -31,12 +31,47 @@
                             dense
                             label="Last Name"
                         ></v-text-field>
+
+                        <v-radio-group
+                            v-model="form.gender"
+                            row
+                            class="ma-0"
+                            >
+                            <v-radio
+                                color="#83C4F3"
+                                label="Male"
+                                value='Male'
+                            ></v-radio>
+                            <v-radio
+                                color="#83C4F3"
+                                label="Female"
+                                value='Female'
+                            ></v-radio>
+                        </v-radio-group>
+
+                        <v-text-field
+                            class = "pt-2 pb-2"
+                            v-model="form.studentID"
+                            dense
+                            label="Student ID"
+                            
+                        ></v-text-field>
+
+                        <v-select
+                            class = "pt-2 pb-2"
+                            :items="yearclass_se"
+                            v-model="form.yearclass"
+                            label="Year Class"
+                            dense
+                        ></v-select>
+
                         <v-text-field
                             class = "pt-2 pb-2"
                             v-model="form.email"
                             dense
                             :rules="emailRules"
                             label="Email"
+                            
                         ></v-text-field>
                         <v-text-field
                             class = "pt-2 pb-2"
@@ -46,7 +81,8 @@
                             @keypress="onlyNumber($event, 10)"
                             label="Phone Number"
                         ></v-text-field>
-                         <v-dialog
+                        
+                         <!-- <v-dialog
                             ref="dialog"
                             v-model="modal"
                             persistent
@@ -85,7 +121,7 @@
                             </v-btn>
                             
                             </v-date-picker>
-                        </v-dialog>
+                        </v-dialog> -->
                         <v-btn
                             large
                             color="primary"
@@ -112,9 +148,10 @@
                     this.$store.dispatch('setLine', profile);
                     this.isDone();
                     })
-                }else{
-                    liff.login();
                 }
+                // else{
+                //     liff.login();
+                // }
                 })
             },  
         // mounted(){
@@ -141,17 +178,15 @@
                     lastname:this.$store.getters.getRegister.lastname, 
                     email:this.$store.getters.getRegister.email,
                     phonenumber:this.$store.getters.getRegister.phonenumber,
-                    // dateofbirth:this.$store.getters.getRegister.dateofbirth,
-                    dateofbirth:this.$store.getters.getRegister.dateofbirth,
-                    
+                    yearclass:this.$store.getters.getRegister.yearclass,
+                    gender:this.$store.getters.getRegister.gender,
+                    studentID:this.$store.getters.getRegister.studentID,
+
                 },
+                yearclass_se:['1','2','3','4'],
                 emailValidated: false,
                 phoneValidated: false,
                 modal: false,
-                // emailRules: [ 
-                //     v => !!v || 'E-mail is <required',
-                //     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-                // ],
                 emailRules: [ value => this.emailValidator(value)],
                 phoneRules: [ value => this.phoneValidator(value)]
 
@@ -211,7 +246,10 @@
                     'lastname',
                     'email',
                     'phonenumber',
-                    'dateofbirth',
+                    'yearclass',
+                    'gender',
+                    'studentID',
+
                 ]
                 validatorField.forEach((field) => {
                     if(this.form[field] == ''){

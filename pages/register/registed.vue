@@ -35,6 +35,27 @@
 
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
+                                <v-list-item-subtitle >Gender</v-list-item-subtitle>
+                                <v-list-item-title>{{form.gender}}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+
+                             <v-list-item>
+                                <v-list-item-content class ="pt-0">
+                                <v-list-item-subtitle >Student ID</v-list-item-subtitle>
+                                <v-list-item-title>{{form.studentID}}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+
+                             <v-list-item>
+                                <v-list-item-content class ="pt-0">
+                                <v-list-item-subtitle >Year of Class</v-list-item-subtitle>
+                                <v-list-item-title>{{form.yearclass}}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+
+                            <v-list-item>
+                                <v-list-item-content class ="pt-0">
                                 <v-list-item-subtitle >Email</v-list-item-subtitle>
                                 <v-list-item-title>{{form.email}}</v-list-item-title>
                                 </v-list-item-content>
@@ -47,12 +68,6 @@
                                 </v-list-item-content>
                             </v-list-item>
 
-                            <v-list-item>
-                                <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Date of Birth</v-list-item-subtitle>
-                                <v-list-item-title>{{form.dateofbirth}}</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
                         </v-list>
                         
                         <v-btn
@@ -80,11 +95,14 @@
             return {
                 form:{
                     firstname:this.$store.getters.getRegister.firstname,
-                    lastname:this.$store.getters.getRegister.lastname,
-                    dateofbirth:this.$store.getters.getRegister.dateofbirth,
+                    lastname:this.$store.getters.getRegister.lastname, 
                     email:this.$store.getters.getRegister.email,
-                    phonenumber:this.$store.getters.getRegister.phonenumber
-                }
+                    phonenumber:this.$store.getters.getRegister.phonenumber,
+                    yearclass:this.$store.getters.getRegister.yearclass,
+                    gender:this.$store.getters.getRegister.gender,
+                    studentID:this.$store.getters.getRegister.studentID,
+                },
+                
             }
         },
         computed: {
@@ -103,7 +121,7 @@
                     liff.sendMessages([
                         {
                         type: "text",
-                        text: "ลงทะเบียน",
+                        text: "ลงทะเบียน Event Bot แล้ว",
                         },
                         ])
                     })

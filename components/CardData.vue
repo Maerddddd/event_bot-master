@@ -3,13 +3,13 @@
   <v-card elevation="0">
     <v-container fluid>
     <v-row class="5">
-        <v-col cols="3" class="head">
+        <v-col cols="4" class="head">
         <p>
             {{data.title}}
         </p>
         </v-col>
         <v-divider vertical></v-divider>
-        <v-col cols="9" class="subhead">
+        <v-col cols="8" class="subhead">
         <p class="sub pl-2">
             {{data.count}}
         </p>

@@ -47,12 +47,14 @@
             <v-row>
               <v-col>
                 <v-form>
-                  <v-card-subtitle class="pa-0 pt-3 font_size_head">Event title:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 pt-3  font_size_head">Event title:</v-card-subtitle>
                   <v-text-field
                     color="#83C4F3"
                     v-model="editedItem.title"
                     outlined
                     dense
+                    hide-details
+                    class="pb-3"
                   ></v-text-field>
             
                   <v-card-subtitle class="pa-0 font_size_head">Organizer:</v-card-subtitle>
@@ -61,6 +63,8 @@
                     v-model="editedItem.organizer"
                     outlined
                     dense
+                    hide-details
+                    class="pb-3"
                   ></v-text-field>
 
                   <v-card-subtitle class="pa-0 font_size_head">Image:</v-card-subtitle>
@@ -69,6 +73,8 @@
                     v-model="editedItem.image"
                     outlined
                     dense
+                    hide-details
+                    class="pb-3"
                   ></v-text-field> 
                   <v-card-subtitle class="pa-0 font_size_head">Date:</v-card-subtitle>
                   <v-menu
@@ -88,6 +94,8 @@
                         v-bind="attrs"
                         v-on="on"
                         clearable
+                        hide-details
+                        class="pb-3"
                         @click:clear="editedItem.date = null"
                       ></v-text-field>
                     </template>
@@ -100,31 +108,43 @@
                       
                     </v-date-picker>
                   </v-menu>
-                  <v-container class="pa-0 pt-4">
-                  <v-row>
-                  <v-col class="time_style">
-                 <v-card-subtitle class="pa-0 font_size_head">Start time:</v-card-subtitle>
-                  <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.start_time_select"
-                    :items="start_time_select"
-                    dense
-                    outlined
-                  ></v-select>
-                  </v-col>
-                  <v-col class="time_style">
-                  <v-card-subtitle class="pa-0 font_size_head">End time:</v-card-subtitle>
-                  <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.end_time_select"
-                    :items="end_time_select"
-                    dense
-                    outlined
-                  ></v-select>
-                  </v-col>
-                  </v-row>
+                  <v-container class="pa-0 pt-3 pb-3">
+                    <v-row>
+                      <v-col class="time_style">
+                        <v-card-subtitle class="pa-0 font_size_head">Start time:</v-card-subtitle>
+                        <v-select
+                          color="#83C4F3"
+                          v-model="editedItem.start_time_select"
+                          :items="start_time_select"
+                          dense
+                          outlined
+                          hide-details
+                        ></v-select>
+                      </v-col>
+
+                      <v-col class="time_style">
+                        <v-card-subtitle class="pa-0 font_size_head">End time:</v-card-subtitle>
+                        <v-select
+                          color="#83C4F3"
+                          v-model="editedItem.end_time_select"
+                          :items="end_time_select"
+                          dense
+                          outlined
+                          hide-details
+                        ></v-select>
+                      </v-col>
+                    </v-row>
                   </v-container>
 
+                  <v-card-subtitle class="pa-0 pt-3  font_size_head">Maximum member:</v-card-subtitle>
+                    <v-text-field
+                    color="#83C4F3"
+                    v-model="editedItem.maximun_member"
+                    dense
+                    outlined
+                    type="number"
+                    hide-details
+                  ></v-text-field>
             </v-form>
               </v-col>
 
@@ -138,6 +158,9 @@
                     color="#83C4F3"
                     outlined
                     dense
+                    hide-details
+                    height="100"
+                    class="pb-3"
                   >
                   </v-textarea>
                     
@@ -145,6 +168,8 @@
                     <v-radio-group
                       v-model="editedItem.certificate"
                       row
+                      hide-details
+                      class="pb-3"
                     >
                       <v-radio
                         color="#83C4F3"
@@ -159,30 +184,38 @@
                     </v-radio-group>
 
                     <v-card-subtitle class="pa-0 pb-2 font_size_head">Support:</v-card-subtitle>
-                    <v-checkbox
-                      v-model="food_checkbox"
-                      color="#83C4F3"
-                      label="Food"
-                      hide-details
-                    ></v-checkbox>
-                    <v-select
-                    :disabled="!food_checkbox"
-                    v-model="editedItem.food_type"
-                    :items ="food_type"
-                    color="#83C4F3"
-                    outlined
-                    dense
-                    class="mt-3"
-                    ></v-select>
                     
-                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Member slot:</v-card-subtitle>
-                    <v-select
-                    color="#83C4F3"
-                    v-model="editedItem.member_slot"
-                    :items="member_slot"
-                    dense
-                    outlined
-                  ></v-select>
+                          <v-checkbox
+                            v-model="editedItem.food"
+                            color="#83C4F3"
+                            label="Food"
+                            hide-details
+                            value="Food"
+                          ></v-checkbox>
+
+                          <v-checkbox
+                            v-model="editedItem.souvenir"
+                            color="#83C4F3"
+                            label="Souvenir"
+                            hide-details
+                            value="Souvenir"
+                          ></v-checkbox>
+                          <v-checkbox
+                            v-model="editedItem.other_box"
+                            color="#83C4F3"
+                            label="Other"
+                            hide-details
+                            value="Other"
+                          ></v-checkbox>
+                            <v-text-field
+                              color="#83C4F3"
+                              :disabled="!editedItem.other_box"
+                              v-model="editedItem.other"
+                              outlined
+                              dense
+                              class="mt-3 pb-3"
+                              hide-details
+                            ></v-text-field>
                 </v-form>
               </v-col>
             </v-row>
@@ -219,75 +252,55 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogDetail" max-width="1300px"> 
+        <v-dialog v-model="dialogDetail" max-width="1400px"> 
           <v-card>
             <v-card-title class="title-card text-primary text-center">Event Detail</v-card-title>
             <v-container fluid>
             <v-row>
-              <v-col cols="6">
+              <v-col cols="5">
                         <div class="image">
                           <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px"></v-img>
                           <v-img v-else :src="editedItem.image" height="250px"></v-img>
                         </div>
-                        <v-card-subtitle class="pt-5 pb-0 font_size_head">
-                          Event title:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.title}}</div>
+
+                        <v-card-text class="pt-4 pb-0 font_size_normal">
+                         <span class="font_size_head">Title:  </span>  {{editedItem.title}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Organizer:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.organizer}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Organizer:  </span>  {{editedItem.organizer}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
+                        <v-card-subtitle class="pt-2 pb-2 font_size_head">
                           Description:
                         </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
+                        <v-card-text class="text--primary pt-0 pb-2 font_size_normal">
                           <div>{{editedItem.description}}</div>
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Date:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div class="font_size">{{editedItem.date}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Date:  </span>  {{editedItem.date}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Time:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.start_time_select}} - {{editedItem.end_time_select}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Time:  </span>  {{editedItem.start_time_select}} - {{editedItem.end_time_select}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Certificate:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.certificate}}</div>
-                        </v-card-text>
-                        
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Support:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.food_type}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Certificate:  </span>  {{editedItem.certificate}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Member Slot:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.member_slot}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Support:  </span>  {{editedItem.food}} {{editedItem.souvenir}} {{editedItem.other}}
+                        </v-card-text>
+
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Maximun member:  </span>  {{editedItem.maximun_member}}
                         </v-card-text>
                  
               </v-col>
               <v-divider vertical></v-divider>
-              <v-col cols="6">
+              <v-col cols="7">
                 <v-data-table
                 :headers="headers2"
                 :items="editedItem.members"
@@ -359,17 +372,15 @@
 <script>
 import { format, parseISO } from 'date-fns'
   export default {
+    // data: () => ({
+    // }),
     data () {
       return {
-        food_type: ['อาหารกลางวัน','อาหารว่าง','อาหารกลางวันและอาหารว่าง'],
-        food_checkbox: false,
-        start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-        end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-        member_slot: ['10','20','30','40','50','60'],
-        date: null,
-        menu: false,
-        certificate: null,
-
+      start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
+      end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
+      date: null,
+      menu: false,
+      certificate: null,
       search: '',
       dialog: false,
       dialogDelete: false,
@@ -389,30 +400,11 @@ import { format, parseISO } from 'date-fns'
       ],
       event_data: [],
       editedIndex: -1,
-      editedItem: {
-        title:'',
-        organizer:'',
-        date:'',
-        start_time_select:'',
-        end_time_select:'',
-        image:'',
-        description:'',
-        member_slot:'',
-        food_type:'',
-        certificate:'',
-        
+      editedItem: { 
+
       },
       defaultItem: {
-        title:'',
-        organizer:'',
-        date:'',
-        start_time_select:'',
-        end_time_select:'',
-        image:'',
-        description:'',
-        member_slot:'',
-        food_type:'',
-        certificate:'',
+
       },
 
       headers2: [      
@@ -423,13 +415,14 @@ import { format, parseISO } from 'date-fns'
           value: 'firstname',
         },
         { text: 'Lastname', value: 'lastname' },
+        { text: 'Gender', value: 'gender'},
+        { text: 'Student ID', value: 'studentID'},
+        { text: 'Year of class', value: 'yearclass'},
         { text: 'Email', value: 'email' },
         { text: 'Phone Number', value: 'phonenumber' },
-        { text: 'Date of birth', value: 'dateofbirth'},
       ],
       }
     },
-
 
     computed: {
       formTitle () {
@@ -459,15 +452,13 @@ import { format, parseISO } from 'date-fns'
         let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
         let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
         const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
-        const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue.profile }))
-        
+        // const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue.profile }))
         this.event_data = entries_events.map(e => {
             return {
                 ...e,
                 members : Object.entries(e.member || {}).map(([memberId,_]) => members.data[memberId]?.profile || {} )
             }
         })
-        // console.log(this.event_data);
       },
 
       editItem (item) {
@@ -485,6 +476,7 @@ import { format, parseISO } from 'date-fns'
 
       deleteItemConfirm () {
         this.$axios.delete(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`)
+        this.$axios.delete(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/select_events/${this.event_data[this.editedIndex].id}.json`)
         this.event_data.splice(this.editedIndex, 1)
         this.closeDelete()
       },
@@ -519,7 +511,8 @@ import { format, parseISO } from 'date-fns'
           // console.log(this.editedItem)
         } else {
           this.event_data.push(this.editedItem)
-          this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`,this.editedItem)
+          // this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`,this.editedItem)
+          this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`,this.editedItem)
         }
         this.close()
       },
@@ -560,4 +553,5 @@ import { format, parseISO } from 'date-fns'
 .image{
   padding: 0px 17px !important;
 }
+
 </style>

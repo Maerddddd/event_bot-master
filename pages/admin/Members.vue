@@ -27,47 +27,33 @@
             <v-container fluid>
             <v-row>
               <v-col>
-                        <!-- <div class="image">
-                          <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px"></v-img>
-                          <v-img v-else :src="editedItem.image" height="250px"></v-img>
-                        </div> -->
-                        <v-card-subtitle class="pt-5 pb-0 font_size_head">
-                          First name:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.firstname}}</div>
+                        <v-card-text class="pt-0 pb-0 font_size_normal">
+                          <span class="font_size_head">Name:  </span> {{editedItem.firstname}} {{editedItem.lastname}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Last name:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.lastname}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">Gender:  </span>  {{editedItem.gender}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Email:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div>{{editedItem.email}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                          <span class="font_size_head">Student ID:  </span>{{editedItem.studentID}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          PhoneNumber:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div class="font_size">{{editedItem.phonenumber}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                          <span class="font_size_head">Year of class:  </span>{{editedItem.yearclass}}
+                        </v-card-text>
+                        
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                          <span class="font_size_head">Email:  </span>{{editedItem.email}}
                         </v-card-text>
 
-                        <v-card-subtitle class="pt-3 pb-0 font_size_head">
-                          Date of birth:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-1 pb-0 font_size_normal">
-                          <div class="font_size">{{editedItem.dateofbirth}}</div>
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                          <span class="font_size_head">Phone Number:  </span>{{editedItem.phonenumber}}
                         </v-card-text>
+
               </v-col>
               <v-divider vertical></v-divider>
-              <v-col cols="6">
+              <v-col cols="7">
                 <v-data-table
                 :headers="headers2"
                 :items="editedItem.events"
@@ -120,9 +106,11 @@
           value: 'firstname',
         },
         { text: 'Lastname', value: 'lastname' },
+        { text: 'Gender', value: 'gender'},
+        { text: 'Student ID', value: 'studentID'},
+        { text: 'Year of class', value: 'yearclass'},
         { text: 'Email', value: 'email' },
         { text: 'Phone Number', value: 'phonenumber' },
-        { text: 'Date of birth', value: 'dateofbirth'},
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       headers2: [
@@ -140,19 +128,9 @@
       member_data: [],
       editedIndex: -1,
       editedItem: {
-        firtname:'',
-        lastname:'',
-        date:'',
-        email:'',
-        phonenumber:'',
 
       },
       defaultItem: {
-        firtname:'',
-        lastname:'',
-        date:'',
-        email:'',
-        phonenumber:'',
 
       },
     }),

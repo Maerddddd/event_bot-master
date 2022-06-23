@@ -1,7 +1,6 @@
 // BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=
 // U933cc0e91e577c936856fac8f5612798
 
-
 // const functions = require('firebase-functions');
 // const request = require('request-promise');
 
@@ -16,7 +15,7 @@
 //     return;
 //   }
 //   reply(req.body);
-//   return res.status(200).send(req.method)
+  
 // });
 
 // const reply = (bodyResponse) => {
@@ -33,7 +32,11 @@
 //         }
 // 	  ]
 //     })
-//   });
+//   }).then(() => {
+//     return res.status(200).send("Done");
+// }).catch(error => {
+//     return Promise.reject(error);
+// });
 // };
 
 // const functions = require('firebase-functions');

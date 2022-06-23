@@ -9,8 +9,10 @@
                 :organizer="post.organizer"
                 :image="post.image"
                 :certificate="post.certificate"
-                :food_type="post.food_type"
-                :member_slot="post.member_slot"
+                :food="post.food"
+                :other="post.other"
+                :souvenir="post.souvenir"
+                :maximun_member="post.maximun_member"
                 :countMember="('member' in post)? Object.keys(post.member).length : 0"
                 :key="post.id"
                 

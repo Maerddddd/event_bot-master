@@ -84,6 +84,12 @@ export default {
         font-family:'Roboto', sans-serif !important;
         background-color: #83C4F3 !important;
     }
+.theme--light.v-banner.v-sheet:not(.v-sheet--outlined):not(.v-sheet--shaped) .v-banner__wrapper {
+    border-bottom: 0;
+}
+.v-banner__wrapper {
+    padding: 0px !important;
+}
 
 </style>
 
