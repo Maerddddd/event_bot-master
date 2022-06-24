@@ -149,26 +149,12 @@
                     this.isDone();
                     })
                 }
-                // else{
-                //     liff.login();
-                // }
+                else{
+                    liff.login();
+                }
                 })
             },  
-        // mounted(){
-        //     liff.init({
-        //         liffId:'1657115807-gN69lN61'
-        //     }).then(()=>{
-        //         if(liff.isLoggedIn()){
-        //             console.log("Login")
-        //             liff.getProfile().then(profile => {                 
-        //             this.$store.dispatch('setLine', profile);
-        //             this.isDone();
-        //             })
-        //         }else{
-        //             liff.login();
-        //         }
-        //     })
-        // },
+
         data() {
             return {
                 // dialog: false,

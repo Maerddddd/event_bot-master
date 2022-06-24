@@ -17,7 +17,6 @@
 <script>
 import { Bar } from 'vue-chartjs/legacy'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
@@ -61,53 +60,32 @@ export default {
     return {
       chartData: {
         labels: Object.keys(this.data),
-        datasets: [ {
-          data: Object.values(this.data),
-          label: "Member",
-          backgroundColor: '#83C4F3',
-          }
+        datasets: [ 
+          {
+          data: Object.values(this.data).map(element =>{return element[0] }),
+          label: "Freshman",
+          backgroundColor: '#F7D7D4',
+          },
+          {
+          data: Object.values(this.data).map(element =>{return element[1] }),
+          label: "Sophomore",
+          backgroundColor: '#E4C2C7',
+          },
+          {
+          data: Object.values(this.data).map(element =>{return element[2] }),
+          label: "Junior",
+          backgroundColor: '#B2A7BB',
+          },
+          {
+          data: Object.values(this.data).map(element =>{return element[3] }),
+          label: "Senior",
+          backgroundColor: '#B0C2D7',
+          },
           ]
       },
       chartOptions: {
         responsive: true
       }
-      // chartOptions: {
-      //   responsive: true,
-      //   legend: {
-      //     display: false,
-      //   },
-      //   title: {
-      //     display: true,
-      //     text: "Google analytics data",
-      //     fontSize: 24,
-      //     fontColor: "#6b7280",
-      //   },
-      //   tooltips: {
-      //     backgroundColor: "#17BF62",
-      //   },
-      //   scales: {
-      //     xAxes: [
-      //       {
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //     yAxes: [
-      //       {
-      //         ticks: {
-      //           beginAtZero: true,
-      //           max: 99,
-      //           min: 0,
-      //           stepSize: 1,
-      //         },
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // },
     }
   }
 }

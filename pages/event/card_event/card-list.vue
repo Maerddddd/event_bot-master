@@ -11,6 +11,7 @@
                 :certificate="post.certificate"
                 :food="post.food"
                 :other="post.other"
+                :other_box="post.other_box"
                 :souvenir="post.souvenir"
                 :maximun_member="post.maximun_member"
                 :countMember="('member' in post)? Object.keys(post.member).length : 0"

@@ -259,7 +259,7 @@
             <v-row>
               <v-col cols="5">
                         <div class="image">
-                          <v-img v-if="editedItem.image == ''" src="https://quadmenu.com/divi/wp-content/uploads/sites/8/2013/06/placeholder-image.png" height="250px"></v-img>
+                          <v-img v-if="editedItem.image == ''" src="https://fairydent.ro/wp-content/uploads/2016/10/orionthemes-placeholder-image-750x750.jpg" height="250px"></v-img>
                           <v-img v-else :src="editedItem.image" height="250px"></v-img>
                         </div>
 
@@ -401,10 +401,32 @@ import { format, parseISO } from 'date-fns'
       event_data: [],
       editedIndex: -1,
       editedItem: { 
-
+        title:"",
+        organizer:"",
+        date:"",
+        start_time_select:"",
+        end_time_select:"",
+        image:"",
+        maximun_member:"",
+        description:"",
+        food:"",
+        souvenir:"",
+        other:"",
+        other_box:"",
       },
       defaultItem: {
-
+        title:"",
+        organizer:"",
+        date:"",
+        start_time_select:"",
+        end_time_select:"",
+        image:"",
+        maximun_member:"",
+        description:"",
+        food:"",
+        souvenir:"",
+        other:"",
+        other_box:"",
       },
 
       headers2: [      
@@ -463,7 +485,6 @@ import { format, parseISO } from 'date-fns'
 
       editItem (item) {
         this.editedIndex = this.event_data.indexOf(item)
-        // console.log(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
@@ -504,15 +525,14 @@ import { format, parseISO } from 'date-fns'
         })
       },
 
-      save () {
+      async save () {
         if (this.editedIndex > -1) {
           Object.assign(this.event_data[this.editedIndex], this.editedItem)
-          this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`,this.editedItem)
-          // console.log(this.editedItem)
+          this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`,this.editedItem)         
         } else {
           this.event_data.push(this.editedItem)
-          // this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`,this.editedItem)
-          this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.event_data[this.editedIndex].id}.json`,this.editedItem)
+          await this.$axios.post(`https://event-bot-628b6-default-rtdb.firebaseio.com/events.json`,this.editedItem)
+          this.initialize()
         }
         this.close()
       },

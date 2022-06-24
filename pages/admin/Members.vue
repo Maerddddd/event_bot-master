@@ -27,7 +27,7 @@
             <v-container fluid>
             <v-row>
               <v-col>
-                        <v-card-text class="pt-0 pb-0 font_size_normal">
+                        <v-card-text class="pt-0 pb-2 font_size_normal">
                           <span class="font_size_head">Name:  </span> {{editedItem.firstname}} {{editedItem.lastname}}
                         </v-card-text>
 

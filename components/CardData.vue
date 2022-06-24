@@ -11,7 +11,7 @@
         <v-divider vertical></v-divider>
         <v-col cols="8" class="subhead">
         <p class="sub pl-2">
-            {{data.count}}
+            {{data.countmember}}
         </p>
         </v-col>
     </v-row>
