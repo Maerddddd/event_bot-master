@@ -3,8 +3,8 @@
     <v-navigation-drawer
       app
       width="250"
-      absolute
-      fixed
+      permanent
+      floating
       >
       <v-sheet
         color="#83C4F3"
@@ -46,10 +46,38 @@
         fluid
       >
       <v-row class ="headbar">
+        <p v-if="state_tab==1" class="main-title ma-auto">Dashboard</p>
+        <p v-if="state_tab==2" class="main-title ma-auto">Member</p>
+        <p v-if="state_tab==3" class="main-title ma-auto">Event</p>
         <v-spacer></v-spacer>
-        <p class="pr-2 ma-auto">Admin</p>
-        <v-icon @click="logout">mdi-logout</v-icon>
-      </v-row>
+
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+         elevation="0"
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Admin
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in profile"
+          :key="index"
+        >
+          <v-list-item-title>
+            <v-btn @click ="Logout">{{ item.title }} <v-icon>{{ item.icon }}</v-icon></v-btn>
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+</v-row>
+
         <v-row>
           <v-col 
             cols="12"
@@ -91,12 +119,16 @@ import event_crud from '~/pages/admin/EventCRUD'
 import dashboard from '~/pages/admin/dashboard'
   export default {
     data: () => ({
+      dialogLogout: false,
       selectedItem: 0,
         nav_list: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard'},
         { title: 'Member', icon: 'mdi-account-multiple'},
         { title: 'Event', icon: 'mdi-alpha-e-box'},
         ],
+        profile: [
+        { title: 'Log out' ,icon:'mdi-logout'},
+      ],
         state_tab: 1,}),
     components:{ 
           member_crud,
@@ -111,7 +143,7 @@ import dashboard from '~/pages/admin/dashboard'
       check_state_tab(){
 
       },
-      logout(){
+      Logout(){
           this.$router.push('/admin')
       }
     },
@@ -122,11 +154,15 @@ import dashboard from '~/pages/admin/dashboard'
 <style lang="scss" scoped>
 .headbar{
     padding-top: 20px;
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-right: 24px;
+    padding-left: 24px;
 }
 .v-navigation-drawer__content{
   background-color: white !important;
 }
-
+.main-title{
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  color: #314F64;
+}
 </style>

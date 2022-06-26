@@ -77,41 +77,8 @@ export default {
           ]
       },
       chartOptions: {
-        // responsive: true,
-        // legend: {
-        //   display: false,
-        // },
-        // title: {
-        //   display: true,
-        //   text: "eiei",
-        //   fontSize: 20,
-        //   fontColor: "#6b7280",
-        // },
-        // tooltips: {
-        //   backgroundColor: "#17BF62",
-        // },
-        scales: {
-          // xAxes: [
-          //   {
-          //     gridLines: {
-          //       display: true,
-          //     },
-          //   },
-          // ],
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                min: 0,
-                stepSize: 1,
-              },
-              // gridLines: {
-              //   display: true,
-              // },
-            },
-          ],
-        },
-      },
+        responsive: true
+      }
     }
   }
 }

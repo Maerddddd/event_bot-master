@@ -78,7 +78,7 @@
                   ></v-text-field> 
                   <v-card-subtitle class="pa-0 font_size_head">Date:</v-card-subtitle>
                   <v-menu
-                    v-model="menu"
+                    v-model="menudate"
                     :close-on-content-click="false"
                     transition="scale-transition"
                     offset-y
@@ -103,35 +103,115 @@
                       v-model="editedItem.date"
                       :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
                       min="1950-01-01"
-                      @change="menu = false"
+                      @change="menudate = false"
                       >
                       
                     </v-date-picker>
                   </v-menu>
+
                   <v-container class="pa-0 pt-3 pb-3">
                     <v-row>
                       <v-col class="time_style">
                         <v-card-subtitle class="pa-0 font_size_head">Start time:</v-card-subtitle>
-                        <v-select
+                        <!-- <v-select
                           color="#83C4F3"
                           v-model="editedItem.start_time_select"
                           :items="start_time_select"
                           dense
                           outlined
                           hide-details
-                        ></v-select>
+                          type="time"
+                        ></v-select> -->
+                        <!-- <v-text-field
+                        color="#83C4F3"
+                        v-model="editedItem.start_time_select"
+                        dense
+                        outlined
+                        hide-details
+                        type="time"
+                        format="24hr"
+                        ></v-text-field> -->
+                        <v-menu
+                          ref="menu"
+                          v-model="time"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          :return-value.sync="editedItem.start_time_select"
+                          transition="scale-transition"
+                          offset-y
+                          max-width="290px"
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editedItem.start_time_select"
+                              readonly
+                              dense
+                              outlined
+                              hide-details
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-time-picker
+                            v-if="time"
+                            format="24hr"
+                            v-model="editedItem.start_time_select"
+                            full-width
+                            @click:minute="$refs.menu.save(editedItem.start_time_select)"
+                          ></v-time-picker>
+                        </v-menu>
                       </v-col>
 
                       <v-col class="time_style">
                         <v-card-subtitle class="pa-0 font_size_head">End time:</v-card-subtitle>
-                        <v-select
+                        <!-- <v-select
                           color="#83C4F3"
                           v-model="editedItem.end_time_select"
                           :items="end_time_select"
                           dense
                           outlined
                           hide-details
-                        ></v-select>
+                        ></v-select> -->
+                        <!-- <v-text-field
+                        color="#83C4F3"
+                        v-model="editedItem.end_time_select"
+                        dense
+                        outlined
+                        hide-details
+                        type="time"
+                        ></v-text-field> -->
+
+                        <v-menu
+                          ref="menu2"
+                          v-model="time2"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          :return-value.sync="editedItem.end_time_select"
+                          transition="scale-transition"
+                          offset-y
+                          max-width="290px"
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editedItem.end_time_select"
+                              readonly
+                              dense
+                              outlined
+                              hide-details
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-time-picker
+                            v-if="time2"
+                            format="24hr"
+                            v-model="editedItem.end_time_select"
+                            full-width
+                            @click:minute="$refs.menu2.save(editedItem.end_time_select)"
+                          ></v-time-picker>
+                          </v-menu>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -376,15 +456,17 @@ import { format, parseISO } from 'date-fns'
     // }),
     data () {
       return {
-      start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-      end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
+      // start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
+      // end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
       date: null,
-      menu: false,
+      menudate: false,
       certificate: null,
       search: '',
       dialog: false,
       dialogDelete: false,
       dialogDetail: false,
+      time: false,
+      time2: false,
       headers: [
         {
           text: 'Title',

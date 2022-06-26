@@ -125,7 +125,7 @@ export default {
         return{
             ...this.post,
             member : this.post.member,
-            items: ['ก่อนเริ่ม 1 นาที', 'ก่อนเริ่ม 5 นาที', 'ก่อนเริ่ม 30 นาที', 'ก่อนเริ่ม 1 ชั่วโมง'],
+            items: ['ก่อนเริ่ม 1 นาที', 'ก่อนเริ่ม 5 นาที', 'ก่อนเริ่ม 30 นาที', 'ก่อนเริ่ม 60 นาที'],
             switch1: false,
             userlineId : {},
             noti_data: {
@@ -149,28 +149,25 @@ export default {
             }
         },
         signup(){
-            liff.init({
-                liffId: '1657115807-gN69lN61'
-                }).then(() => {
-                liff.sendMessages([
-                    {
-                      type: "text",
-                      text: "ลงชื่อร่วมกิจกรรมแล้ว",
-                    },
-                  ])
-                })
-        // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.id}/member.json`, this.$store.getters.getLine.userId )
+            // liff.init({
+            //     liffId: '1657115807-gN69lN61'
+            //     }).then(() => {
+            //     liff.sendMessages([
+            //         {
+            //           type: "text",
+            //           text: "ลงชื่อร่วมกิจกรรมแล้ว",
+            //         },
+            //       ])
+            //     })
 
-        // this.$axios.post('https://api.line.me/v2/bot/message/push',{ 
-        //     to : 'U933cc0e91e577c936856fac8f5612798',
-        //     massages : [ {type : 'text', text : 'He Heee'}]
-        // },{ headers : {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Referer' : 'https://79bc-1-10-216-187.ap.ngrok.io/',
-        //     'Content-Type': 'application/json',
-        //     'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
-        // } })
+        // // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.id}/member.json`, this.$store.getters.getLine.userId )
 
+        this.$axios.post('https://us-central1-event-bot-628b6.cloudfunctions.net/LineBot',{ 
+            description : "submit register",
+            to : this.$store.getters.getLine.userId, //,"U933cc0e91e577c936856fac8f5612798"
+            msg : `ท่านได้ลงชื่อเข้าร่วมกิจกรรม ${this.title} แล้ว\nเวลา: ${new Date().toString()} `
+        })
+   
         this.userlineId[this.$store.getters.getLine.userId] = 0 
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/events/${this.id}/member.json`, this.userlineId )
         this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/select_events/${this.id}.json`,{time_stamp:new Date()})

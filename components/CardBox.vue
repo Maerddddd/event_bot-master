@@ -1,12 +1,12 @@
 <template>
-<v-card v-bind="$attrs" v-on="$listeners">
+<v-card v-bind="$attrs" v-on="$listeners" rounded="xl" class="pa-3">
   <v-list-item>
     <v-list-item-content>
       <v-layout wrap>
     <v-row>
       <v-col>
-        <v-list-item-title class="my-2 text-left" :class="titleClass">{{title}}</v-list-item-title>
-        <span class="text-size">{{fileCount}}</span>
+        <v-list-item-title class="my-2 text-left text-head" :class="titleClass">{{title}}</v-list-item-title>
+        <span class="text-sub">{{fileCount}}</span>
       </v-col>
       <v-spacer></v-spacer>
       <v-col class="text-right pt-6">
@@ -34,8 +34,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.text-size{
+.text-sub{
+  font-size: 18px;
+  color: #314F64 !important;
+  font-weight: bold !important;
+
+}
+.text-head{
+  color: rgb(100, 100, 100) !important;
   font-size: 14px;
+  
+  
 }
 
 </style>

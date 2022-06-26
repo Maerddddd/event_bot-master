@@ -6,7 +6,13 @@
         <v-col>
         <span class="text-sub">Name: </span> <span class="text-head">{{data.title}}</span>
         <br>
-        <span class="text-sub">Member: </span> <span>{{data.countmember}}</span>
+        <span class="text-sub">Freshman: </span> <span>{{data.oneArray}}</span>
+        <br>
+        <span class="text-sub">Sophomore: </span> <span>{{data.twoArray}}</span>
+        <br>
+        <span class="text-sub">Junior: </span> <span>{{data.threeArray}}</span>
+        <br>
+        <span class="text-sub">Senior: </span> <span>{{data.fourArray}}</span>
         </v-col>
     </v-row>
     </v-container>

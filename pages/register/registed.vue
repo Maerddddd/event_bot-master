@@ -101,8 +101,7 @@
                     yearclass:this.$store.getters.getRegister.yearclass,
                     gender:this.$store.getters.getRegister.gender,
                     studentID:this.$store.getters.getRegister.studentID,
-                },
-                
+                },              
             }
         },
         computed: {
@@ -115,44 +114,28 @@
                 this.$router.push('/register')
                 },
             register(){
-                    liff.init({
-                    liffId: '1657115807-gN69lN61'
-                    }).then(() => {
-                    liff.sendMessages([
-                        {
-                        type: "text",
-                        text: "ลงทะเบียน Event Bot แล้ว",
-                        },
-                        ])
+                    // liff.init({
+                    // liffId: '1657115807-gN69lN61'
+                    // }).then(() => {
+                    // liff.sendMessages([
+                    //     {
+                    //     type: "text",
+                    //     text: "ลงทะเบียน Event Bot แล้ว",
+                    //     },
+                    //     ])
+                    // })
+
+                    this.$axios.post('https://us-central1-event-bot-628b6.cloudfunctions.net/LineBot',{ 
+                    description : "submit register",
+                    to : this.$store.getters.getLine.userId, //,"U933cc0e91e577c936856fac8f5612798"
+                    msg : `ท่านได้ลงทะเบียน Event Bot แล้ว\nเวลา: ${new Date().toString()} `
                     })
+
                     this.$store.dispatch('setRegister', this.form)
                     this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister)
                     .then((res) => {
                         this.$router.push('/register/done')
-                        // const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
-                        // const LINE_HEADER = {
-                        // 'Content-Type': 'application/json',
-                        // 'Authorization': `Bearer BVPvhHEEmeK6IqQCufn16ZBsMiKBYbQHOeqXJdxhRt6ddy2UiC6qc2h+fhnCercOg5quXqesBNWcTvVzpCmXV3fbMFnecBpkQ9Xk/HOFDGPAlFFXztFcQ9JQjbPA07xoFVrkGbzoDkoxpl46LPV/CQdB04t89/1O/w1cDnyilFU=`
-                        // };
-                        // this.$axios.post(LINE_MESSAGING_API)
-                        // headers: LINE_HEADER,
-                        // body: JSON.stringify({
-                        // replyToken: bodyResponse.events[0].replyToken,
-                        // messages: [
-                        //     {
-                        //     type: `text`,
-                        //     text: bodyResponse.events[0].message.text
-                        //     }
-                        // ]
-                        // })
-
                     })
-                // this.$store.dispatch('setRegister', this.form)
-                // // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister).then((res) => {
-                // this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}.json`, this.$store.getters.getRegister)
-                // .then((res) => {
-                // this.$router.push('/register/done')
-                // })
             },
             
 
