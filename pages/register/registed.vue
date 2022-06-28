@@ -4,7 +4,7 @@
         flat
         dense
         dark>
-        <v-toolbar-title>Validate</v-toolbar-title>
+        <v-toolbar-title>Event Bot</v-toolbar-title>
         </v-app-bar>
         <v-container class ="pt-0 pb-0">
             <v-row>
@@ -21,49 +21,49 @@
                        class ="pt-0 pb-0 ">
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle>First Name</v-list-item-subtitle>
+                                <v-list-item-subtitle>ชื่อจริง</v-list-item-subtitle>
                                 <v-list-item-title>{{form.firstname}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Last Name</v-list-item-subtitle>
+                                <v-list-item-subtitle >นามสกุล</v-list-item-subtitle>
                                 <v-list-item-title>{{form.lastname}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Gender</v-list-item-subtitle>
+                                <v-list-item-subtitle >เพศ</v-list-item-subtitle>
                                 <v-list-item-title>{{form.gender}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                              <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Student ID</v-list-item-subtitle>
+                                <v-list-item-subtitle >รหัสนักเรียน</v-list-item-subtitle>
                                 <v-list-item-title>{{form.studentID}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                              <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Year of Class</v-list-item-subtitle>
+                                <v-list-item-subtitle >ชั้นปี</v-list-item-subtitle>
                                 <v-list-item-title>{{form.yearclass}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Email</v-list-item-subtitle>
+                                <v-list-item-subtitle >อีเมล</v-list-item-subtitle>
                                 <v-list-item-title>{{form.email}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                             <v-list-item>
                                 <v-list-item-content class ="pt-0">
-                                <v-list-item-subtitle >Phone Number</v-list-item-subtitle>
+                                <v-list-item-subtitle >เบอร์โทรศัพท์</v-list-item-subtitle>
                                 <v-list-item-title >{{form.phonenumber}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
@@ -74,14 +74,14 @@
                             large
                             color="primary"
                             class ="w-100 mt-5" @click="register">
-                            Register
+                            ลงทะเบียน
                         </v-btn>
                         <v-btn
                             large
                             outlined
                             color="primary"
                             class ="w-100 mt-4" @click="edit">
-                            Edit info
+                            แก้ไขข้อมูล
                         </v-btn>
                     </v-form>
                 </v-col>
@@ -114,20 +114,9 @@
                 this.$router.push('/register')
                 },
             register(){
-                    // liff.init({
-                    // liffId: '1657115807-gN69lN61'
-                    // }).then(() => {
-                    // liff.sendMessages([
-                    //     {
-                    //     type: "text",
-                    //     text: "ลงทะเบียน Event Bot แล้ว",
-                    //     },
-                    //     ])
-                    // })
-
                     this.$axios.post('https://us-central1-event-bot-628b6.cloudfunctions.net/LineBot',{ 
                     description : "submit register",
-                    to : this.$store.getters.getLine.userId, //,"U933cc0e91e577c936856fac8f5612798"
+                    to : this.$store.getters.getLine.userId,
                     msg : `ท่านได้ลงทะเบียน Event Bot แล้ว\nเวลา: ${new Date().toString()} `
                     })
 
@@ -136,11 +125,9 @@
                     .then((res) => {
                         this.$router.push('/register/done')
                     })
-            },
-            
-
-        }
-    }
+                    },
+                }
+            }
 </script>
 <style lang="scss" scoped>
 

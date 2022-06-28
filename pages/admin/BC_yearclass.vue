@@ -63,22 +63,22 @@ export default {
         datasets: [ 
           {
           data: Object.values(this.data).map(element =>{return element[0] }),
-          label: "Freshman",
+          label: "ชั้นปี 1",
           backgroundColor: '#F7D7D4',
           },
           {
           data: Object.values(this.data).map(element =>{return element[1] }),
-          label: "Sophomore",
+          label: "ชั้นปี 2",
           backgroundColor: '#E4C2C7',
           },
           {
           data: Object.values(this.data).map(element =>{return element[2] }),
-          label: "Junior",
+          label: "ชั้นปี 3",
           backgroundColor: '#B2A7BB',
           },
           {
           data: Object.values(this.data).map(element =>{return element[3] }),
-          label: "Senior",
+          label: "ชั้นปี 4",
           backgroundColor: '#B0C2D7',
           },
           ]

@@ -4,11 +4,11 @@
     <v-container fluid>
     <v-row >
         <v-col>
-        <span class="text-sub">Name: </span> <span class="text-head">{{data.title}}</span>
+        <span class="text-sub">ชื่อ: </span> <span class="text-head">{{data.title}}</span>
         <br>
-        <span class="text-sub">Male: </span> <span>{{data.maleArray}}</span>
+        <span class="text-sub">ผู้ชาย: </span> <span>{{data.maleArray}}</span>
         <br>
-        <span class="text-sub">Female: </span> <span>{{data.femaleArray}}</span>
+        <span class="text-sub">ผู้หญิง: </span> <span>{{data.femaleArray}}</span>
         </v-col>
     </v-row>
     </v-container>

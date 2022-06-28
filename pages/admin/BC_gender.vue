@@ -63,13 +63,13 @@ export default {
         //Object.keys(this.data)
         datasets: [ 
           {
-          label: 'Male',
+          label: 'ชาย',
           data: Object.values(this.data).map(element =>{return element[0] }),
           //Object.values(this.data[0]),
           backgroundColor: '#83C4F3',
           },
           {
-          label: 'Female',
+          label: 'หญิง',
           data: Object.values(this.data).map(element =>{return element[1] }),
           //Object.values(this.data)[1]
           backgroundColor: '#B0C2D7',

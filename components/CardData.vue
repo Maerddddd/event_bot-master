@@ -4,9 +4,9 @@
     <v-container fluid>
     <v-row >
         <v-col>
-        <span class="text-sub">Name: </span> <span class="text-head">{{data.title}}</span>
+        <span class="text-sub">ชื่อ: </span> <span class="text-head">{{data.title}}</span>
         <br>
-        <span class="text-sub">Member: </span> <span>{{data.countmember}}</span>
+        <span class="text-sub">สมาชิก: </span> <span>{{data.countmember}}</span>
         </v-col>
     </v-row>
     </v-container>

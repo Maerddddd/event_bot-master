@@ -4,7 +4,7 @@
       <v-row >
         <v-col cols="2">
           <card-box
-            title="Members"
+            title="สมาชิกทั้งหมด"
             :fileCount="Object.keys(member_data).length"
             color="white"
             icon="mdi-account-multiple"
@@ -13,7 +13,7 @@
         </v-col>
         <v-col cols="2">
           <card-box
-            title="Events"
+            title="กิจกรรมทั้งหมด"
             :fileCount="Object.keys(event_data).length"
             color="white"
             flat
@@ -25,7 +25,7 @@
       <v-card elevation="0" class="mt-4 mb-4" rounded="xl" width="1200">
       <v-row>       
         <v-col cols="2" class="pa-6 pr-0">
-          <v-text class="text-sl pl-2">Select Graph</v-text>
+          <v-text class="text-sl pl-2">เลือกกราฟ</v-text>
         </v-col>
         <v-col cols="8">
           <v-select
@@ -139,9 +139,9 @@ export default {
       yearclass_data: [],
       state_tab: 1,
       sl_graph: [
-        { text: 'Member', value: 1 },
-        { text: 'Gender', value: 2 },
-        { text: 'Year of class', value: 3 },
+        { text: 'สมาชิก', value: 1 },
+        { text: 'เพศ', value: 2 },
+        { text: 'ชั้นปี', value: 3 },
       ]
     };
   },
@@ -168,8 +168,8 @@ export default {
           const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
           this.gender_data = Object.fromEntries(entries_events.map(e => {
             let genArray = Object.entries(e.member || {}).map(([memberId,_]) => members.data[memberId]?.profile.gender || {} )
-            let maleArray = genArray.filter(element => {return element == 'Male'}).length
-            let femaleArray = genArray.filter(element => {return element == 'Female'}).length
+            let maleArray = genArray.filter(element => {return element == 'ชาย'}).length
+            let femaleArray = genArray.filter(element => {return element == 'หญิง'}).length
             this.genderData.push({title: e.title , maleArray: maleArray , femaleArray: femaleArray })
             return [
               e.title,

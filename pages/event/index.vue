@@ -3,7 +3,7 @@
         <v-app-bar color ="#83C4F3"
         flat
         dense>
-        <v-toolbar-title>Select Event</v-toolbar-title>
+        <v-toolbar-title>Event Bot</v-toolbar-title>
         </v-app-bar>
 
         <card_list :posts="loadData"/>
@@ -13,7 +13,6 @@
 <script>
 import card_list from '~/pages/event/card_event/card-list'
 import axios from 'axios'
-import { fetch } from 'node-fetch'
 export default {
     components: {
       card_list,

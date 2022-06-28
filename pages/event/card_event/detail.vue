@@ -44,21 +44,21 @@
             <v-divider></v-divider>
             <div class="card-content2">
                 <v-card-text>
-                    <span class="event-des ">Date: </span>{{date}}
+                    <span class="event-des ">วันที่: </span>{{date}}
                 </v-card-text>
                 <v-card-text class="mb-3">
-                    <span class="event-des ">Time: </span>{{start_time_select}} - {{end_time_select}}
+                    <span class="event-des ">เวลา: </span>{{start_time_select}} - {{end_time_select}}
                 </v-card-text>
                 <v-divider class="mb-3"></v-divider>
                 <v-card-text class="mb-3">
-                    <span class="event-des ">Description: </span>{{description}}
+                    <span class="event-des ">รายละเอียด: </span>{{description}}
                 </v-card-text>
                 <v-divider class="mb-3"></v-divider>
                 <v-card-text>
-                    <span class="event-des ">Certificate: </span>{{certificate}}
+                    <span class="event-des ">ใบรับรอง: </span>{{certificate}}
                 </v-card-text>
                 <v-card-text>
-                    <span class="event-des ">Support: </span>{{food}} {{souvenir}} {{other}}
+                    <span class="event-des ">การสนับสนุน: </span>{{food}} {{souvenir}} {{other}}
                 </v-card-text>
 
             </div>
@@ -72,7 +72,7 @@
             <v-container >
             <v-row >
                 <v-col class="pb-0 pt-4" cols="9">
-                    <p class="d-flex align-center ma-0 mt-1 event-des ">Notification Setting</p>
+                    <p class="d-flex align-center ma-0 mt-1 event-des ">ตั้งค่าการแจ้งเตือน</p>
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col class="pb-0">
@@ -98,7 +98,7 @@
                     dense
                     outlined
                     flat
-                    label="Time Set"
+                    label="เลือกเวลา"
                     class="pa-1"
                 ></v-select>
             </v-banner>
@@ -112,7 +112,7 @@
             large
             color="primary"
             class ="w-100 mt-2 " @click="signup">
-            Sign up
+            เข้าร่วมกิจกรรม
         </v-btn>
         </v-container>                    
 </template>
@@ -177,8 +177,8 @@ export default {
             const Swal = require('sweetalert2')
             Swal.fire({
                 icon: 'success',
-                title: 'Success',
-                text: 'Your account has been registered.',
+                title: 'เสร็จสิ้น',
+                text: 'บัญชีของคุณได้ทำการเข้าร่ววมกิจกรรมเรียบร้อยแล้ว',
                 })
             })
         },

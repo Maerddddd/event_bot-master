@@ -57,13 +57,14 @@ export default {
       required: true
     },
   },
+
   data() {
     return {
       chartData: {
         labels: Object.keys(this.data),
         datasets: [ {
           data: Object.values(this.data),
-          label: "Member",
+          label: "สมาชิก",
           backgroundColor: '#83C4F3',
           }
           ]
@@ -71,43 +72,6 @@ export default {
       chartOptions: {
         responsive: true
       }
-      // chartOptions: {
-      //   responsive: true,
-      //   legend: {
-      //     display: false,
-      //   },
-      //   title: {
-      //     display: true,
-      //     text: "Google analytics data",
-      //     fontSize: 24,
-      //     fontColor: "#6b7280",
-      //   },
-      //   tooltips: {
-      //     backgroundColor: "#17BF62",
-      //   },
-      //   scales: {
-      //     xAxes: [
-      //       {
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //     yAxes: [
-      //       {
-      //         ticks: {
-      //           beginAtZero: true,
-      //           max: 99,
-      //           min: 0,
-      //           stepSize: 1,
-      //         },
-      //         gridLines: {
-      //           display: true,
-      //         },
-      //       },
-      //     ],
-      //   },
-      // },
     }
   }
 }

@@ -11,9 +11,7 @@
             justify="end"
             class="pa-2"
             >
-            <v-sheet
-                rounded="xl"
-            >
+            <v-sheet rounded="xl">
                 <span class="subheading pa-2">{{countMember}} / {{maximun_member}}</span>
             </v-sheet>
             </v-row>
@@ -44,10 +42,10 @@
                 </v-card-text>
             </div>
                 <v-card class="icon-style" tile >
-                    <v-icon :color="(certificate == 'Have certificate')? '#83C4F3' : '#EAEAEA'">
+                    <v-icon :color="(certificate == 'มีใบรับรอง')? '#83C4F3' : '#EAEAEA'">
                         mdi-certificate-outline
                     </v-icon>
-                    <v-icon :color="(food == 'Food' || other_box == 'Other' || souvenir == 'Souvenir' )? '#83C4F3' : '#EAEAEA' ">
+                    <v-icon :color="(food == 'อาหาร' || other_box == 'อื่นๆ' || souvenir == 'ของที่ระลึก' )? '#83C4F3' : '#EAEAEA' ">
                         mdi-food
                     </v-icon>
                 </v-card>             
@@ -105,7 +103,6 @@ export default {
         },
 
     },
-
     methods: {
         more_detail(){
             this.$router.push('/event/card_event/'+this.id)

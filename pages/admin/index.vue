@@ -8,10 +8,10 @@
             ref="form"
             lazy-validation
           > 
-            <div class ="text-title">Sign in</div>
+            <div class ="text-title">เข้าสู่ระบบ</div>
             <v-text-field
               v-model="username"
-              label="Username"
+              label="ชื่อผู้ใช้"
             ></v-text-field>
 
             <v-text-field
@@ -20,7 +20,7 @@
             :rules="[rules.required]"
             :type="show1 ? 'text' : 'password'"
             @click:append="show1 = !show1"
-              label="Password"
+              label="รหัสผ่าน"
 
             ></v-text-field>
             <v-btn
@@ -28,7 +28,7 @@
               @click="Signin"
               large
             >
-                Sign in
+                เข้าสู่ระบบ
             </v-btn>
           </v-form>
           </div>

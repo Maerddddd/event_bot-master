@@ -11,9 +11,10 @@
       >
         <v-toolbar-title>
           <v-text-field
+            placeholder="คีย์เวิร์ดที่ต้องการค้นหา"
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            label="ค้นหา"
             single-line
             hide-details
             outlined
@@ -23,50 +24,63 @@
 
         <v-dialog v-model="dialogDetail" max-width="1300px"> 
           <v-card>
-            <v-card-title class="title-card text-primary text-center">Member Detail</v-card-title>
+            <v-card-title class="title-card text-primary text-center">รายละเอียดสมาชิก</v-card-title>
             <v-container fluid>
             <v-row>
               <v-col>
                         <v-card-text class="pt-0 pb-2 font_size_normal">
-                          <span class="font_size_head">Name:  </span> {{editedItem.firstname}} {{editedItem.lastname}}
+                          <span class="font_size_head">ชื่อ:  </span> {{editedItem.firstname}} {{editedItem.lastname}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Gender:  </span>  {{editedItem.gender}}
+                         <span class="font_size_head">เพศ:  </span>  {{editedItem.gender}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                          <span class="font_size_head">Student ID:  </span>{{editedItem.studentID}}
+                          <span class="font_size_head">รหัสนักเรียน:  </span>{{editedItem.studentID}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                          <span class="font_size_head">Year of class:  </span>{{editedItem.yearclass}}
+                          <span class="font_size_head">ชั้นปี:  </span>{{editedItem.yearclass}}
                         </v-card-text>
                         
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                          <span class="font_size_head">Email:  </span>{{editedItem.email}}
+                          <span class="font_size_head">อีเมล:  </span>{{editedItem.email}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                          <span class="font_size_head">Phone Number:  </span>{{editedItem.phonenumber}}
+                          <span class="font_size_head">เบอร์โทรศัพท์:  </span>{{editedItem.phonenumber}}
                         </v-card-text>
 
               </v-col>
               <v-divider vertical></v-divider>
               <v-col cols="7">
+                <v-toolbar-title>
+                  <v-text-field
+                    placeholder="คีย์เวิร์ดที่ต้องการค้นหา"
+                    v-model="search2"
+                    append-icon="mdi-magnify"
+                    label="ค้นหา"
+                    single-line
+                    hide-details
+                    dense
+                    outlined
+                  ></v-text-field>
+                </v-toolbar-title>
                 <v-data-table
-                :headers="headers2"
-                :items="editedItem.events"
-                :search="search"
-                sort-by="title"
-                class="elevation-0">
+                  :headers="headers2"
+                  :items="editedItem.events"
+                  :search="search2"
+                  sort-by="title"
+                  class="elevation-0"
+                >
                 </v-data-table>
               </v-col>
             </v-row>
           </v-container>
           <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDetail">OK</v-btn>
+          <v-btn color="blue darken-1" text @click="closeDetail">ตกลง</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -79,7 +93,7 @@
       small
       @click="moredetailItem(item)"
     >
-      More Details
+      รายละเอียดเพิ่มเติม
     </v-btn>
     </template>
     <template v-slot:no-data>
@@ -88,7 +102,7 @@
         @click="initialize"
         outlined
       >
-        Reset
+        รีเซ็ต
       </v-btn>
     </template>
   </v-data-table>
@@ -97,33 +111,34 @@
   export default {
     data: () => ({
       search: '',
+      search2: '',
       dialogDetail: false,
       headers: [
         {
-          text: 'Firstname',
+          text: 'ชื่อ',
           align: 'start',
           sortable: false,
           value: 'firstname',
         },
-        { text: 'Lastname', value: 'lastname' },
-        { text: 'Gender', value: 'gender'},
-        { text: 'Student ID', value: 'studentID'},
-        { text: 'Year of class', value: 'yearclass'},
-        { text: 'Email', value: 'email' },
-        { text: 'Phone Number', value: 'phonenumber' },
-        { text: 'Actions', value: 'actions', sortable: false },
+        { text: 'นามสกุล', value: 'lastname' },
+        { text: 'เพศ', value: 'gender'},
+        { text: 'รหัสนักเรียน', value: 'studentID'},
+        { text: 'ชั้นปี', value: 'yearclass'},
+        { text: 'อีเมล', value: 'email' },
+        { text: 'เบอร์โทรศัพท์', value: 'phonenumber' },
+        {  value: 'actions', sortable: false },
       ],
       headers2: [
         {
-          text: 'Title',
+          text: 'ชื่อกิจกรรม',
           align: 'start',
           sortable: false,
           value: 'title',
         },
-        { text: 'Organizer', value: 'organizer' },
-        { text: 'Date', value: 'date' },
-        { text: 'Start Time', value: 'start_time_select'},
-        { text: 'End Time', value: 'end_time_select' },
+        { text: 'ผู้จัดกิจกรมม', value: 'organizer' },
+        { text: 'วันที่เริ่มกิจกรรม', value: 'date' },
+        { text: 'เวลาเริ่มกิจกรรม', value: 'start_time_select'},
+        { text: 'เวลาสิ้นสุดกิจกรรม', value: 'end_time_select' },
       ],
       member_data: [],
       editedIndex: -1,

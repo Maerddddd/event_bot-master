@@ -4,15 +4,15 @@
     <v-container fluid>
     <v-row >
         <v-col>
-        <span class="text-sub">Name: </span> <span class="text-head">{{data.title}}</span>
+        <span class="text-sub">ชื่อ: </span> <span class="text-head">{{data.title}}</span>
         <br>
-        <span class="text-sub">Freshman: </span> <span>{{data.oneArray}}</span>
+        <span class="text-sub">ชั้นปี 1: </span> <span>{{data.oneArray}}</span>
         <br>
-        <span class="text-sub">Sophomore: </span> <span>{{data.twoArray}}</span>
+        <span class="text-sub">ชั้นปี 2: </span> <span>{{data.twoArray}}</span>
         <br>
-        <span class="text-sub">Junior: </span> <span>{{data.threeArray}}</span>
+        <span class="text-sub">ชั้นปี 3: </span> <span>{{data.threeArray}}</span>
         <br>
-        <span class="text-sub">Senior: </span> <span>{{data.fourArray}}</span>
+        <span class="text-sub">ชั้นปี 4: </span> <span>{{data.fourArray}}</span>
         </v-col>
     </v-row>
     </v-container>
@@ -29,7 +29,6 @@ export default {
   },
   data() {
     return {
-
     }
   }
 }

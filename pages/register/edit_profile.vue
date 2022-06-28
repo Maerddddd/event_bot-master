@@ -4,13 +4,15 @@
         flat
         dense
         dark>
-        <v-toolbar-title>Event Bot</v-toolbar-title>
+        <v-toolbar-title>Edit Profile</v-toolbar-title>
         </v-app-bar>
         <v-container class ="pt-0 pb-0">
             <v-row>
                 <v-col cols= "12" class="pt-11 pb-0 text-center profile-img"> 
+                        <!-- <img src ="~assets/profile-img.png" alt="" width="120" height="120"> -->
                         <img v-if="getLine.pictureUrl == ''" src="~assets/profile-img.png" alt="" width="120">
                         <img v-else :src="getLine.pictureUrl" alt="" width="120">
+
                 </v-col>
                 <v-col cols= "12" class = "pt-4 pb-0 text-primary text-title text-center">          
                         {{getLine.displayName}}
@@ -21,13 +23,13 @@
                             class = "pt-2 pb-2" 
                             v-model="form.firstname"
                             dense
-                            label="ชื่อจริง"
-                        ></v-text-field>
+                            label="First Name"
+                        >{{form.firstname}}</v-text-field>
                         <v-text-field
                             class = "pt-2 pb-2"
                             v-model="form.lastname"
                             dense
-                            label="นามสกุล"
+                            label="Last Name"
                         ></v-text-field>
 
                         <v-radio-group
@@ -37,13 +39,13 @@
                             >
                             <v-radio
                                 color="#83C4F3"
-                                label="ชาย"
-                                value='ชาย'
+                                label="Male"
+                                value='Male'
                             ></v-radio>
                             <v-radio
                                 color="#83C4F3"
-                                label="หญิง"
-                                value='หญิง'
+                                label="Female"
+                                value='Female'
                             ></v-radio>
                         </v-radio-group>
 
@@ -51,15 +53,15 @@
                             class = "pt-2 pb-2"
                             v-model="form.studentID"
                             dense
-                            label="รหัสนักเรียน"
-                            type="number"                           
+                            label="Student ID"
+                            
                         ></v-text-field>
 
                         <v-select
                             class = "pt-2 pb-2"
                             :items="yearclass_se"
                             v-model="form.yearclass"
-                            label="ชั้นปี"
+                            label="Year Class"
                             dense
                         ></v-select>
 
@@ -68,7 +70,7 @@
                             v-model="form.email"
                             dense
                             :rules="emailRules"
-                            label="อีเมล"
+                            label="Email"
                             
                         ></v-text-field>
                         <v-text-field
@@ -77,13 +79,14 @@
                             dense
                             :rules="phoneRules"
                             @keypress="onlyNumber($event, 10)"
-                            label="เบอร์โทรศัพท์"
+                            label="Phone Number"
                         ></v-text-field>
+
                         <v-btn
                             large
                             color="primary"
-                            class ="w-100 mt-5" @click="next">
-                            ลงทะเบียน
+                            class ="w-100 mt-5" @click="submit">
+                            ยืนยัน
                         </v-btn>
                     </v-form>
                 </v-col>
@@ -97,40 +100,19 @@
     const REGEX_NUMBER = /^[0-9]*$/
     export default {
         mounted(){
-                liff.init({
-                liffId: '1657115807-gN69lN61'
-                }).then(() => {
-                if(liff.isLoggedIn()){
-                    liff.getProfile().then(profile => {                    
-                    this.$store.dispatch('setLine', profile);
-                    this.isDone();
-                    })
-                }
-                else{
-                    liff.login();
-                    }
-                })
             },  
 
         data() {
             return {
-                // dialog: false,
-                // errorMsg: '',
-                form:{
-                    firstname:this.$store.getters.getRegister.firstname,
-                    lastname:this.$store.getters.getRegister.lastname, 
-                    email:this.$store.getters.getRegister.email,
-                    phonenumber:this.$store.getters.getRegister.phonenumber,
-                    yearclass:this.$store.getters.getRegister.yearclass,
-                    gender:this.$store.getters.getRegister.gender,
-                    studentID:this.$store.getters.getRegister.studentID,
-                },
+                form:{},
                 yearclass_se:['1','2','3','4'],
                 emailValidated: false,
                 phoneValidated: false,
                 modal: false,
                 emailRules: [ value => this.emailValidator(value)],
-                phoneRules: [ value => this.phoneValidator(value)]
+                phoneRules: [ value => this.phoneValidator(value)],
+                member_data: [],
+
             }
         },
         computed: {
@@ -138,14 +120,30 @@
                         return this.$store.getters.getLine;      
                         }
                     },
+
+        async created () {
+            await this.initialize()
+        },
         methods: {
-            isDone(){
-                this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`).then((res) => {
-                    if(res.data != null){
-                    this.$router.push('/register/done');
+            async initialize () {
+            const res = await this.$axios.get(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`)
+            this.form = res.data
+            },
+            submit(){
+
+                    this.$axios.post('https://us-central1-event-bot-628b6.cloudfunctions.net/LineBot',{ 
+                    description : "submit register",
+                    to : this.$store.getters.getLine.userId, //,"U933cc0e91e577c936856fac8f5612798"
+                    msg : `ท่านได้แก้ไขข้อมูลการลงทะเบียนแล้ว\nเวลา: ${new Date().toString()} `
+                    })
+                    if(this.validate()){
+                    this.$store.dispatch('setRegister', this.form)
+                    this.$axios.patch(`https://event-bot-628b6-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister)
+                    .then((res) => {
+                        this.$router.push('/register/done')
+                    })
                     }
-                });
-                },
+            },
              phoneValidator(value){    
                 this.phoneValidated = false  
                 if(value == ''){
@@ -212,16 +210,17 @@
                         isShow: true,
                         title:'Form Error',
                         message: errors.map((error) => error+'<br/>').join('')
+
                     })
                 }
                 return validated
                  },
-                next(){
-                    if(this.validate()){
-                        this.$store.dispatch('setRegister', this.form)
-                        this.$router.push('/register/registed')
-                }
-                }
+                // next(){
+                //     if(this.validate()){
+                //         this.$store.dispatch('setRegister', this.form)
+                //         this.$router.push('/register/done')
+                // }
+                // }
         }
     }
 </script>

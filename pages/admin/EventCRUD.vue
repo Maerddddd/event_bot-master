@@ -11,9 +11,10 @@
       >
         <v-toolbar-title>
           <v-text-field
+            placeholder="คีย์เวิร์ดที่ต้องการค้นหา"
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            label="ค้นหา"
             single-line
             hide-details
             dense
@@ -47,8 +48,9 @@
             <v-row>
               <v-col>
                 <v-form>
-                  <v-card-subtitle class="pa-0 pt-3  font_size_head">Event title:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 pt-3  font_size_head">ชื่อกิจกรรม:</v-card-subtitle>
                   <v-text-field
+                    placeholder="กรุณาใส่ชื่อกิจกรรม"
                     color="#83C4F3"
                     v-model="editedItem.title"
                     outlined
@@ -57,8 +59,9 @@
                     class="pb-3"
                   ></v-text-field>
             
-                  <v-card-subtitle class="pa-0 font_size_head">Organizer:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 font_size_head">ผู้จัดกิจกรรม:</v-card-subtitle>
                   <v-text-field
+                    placeholder="กรุณาใส่ผู้จัดกิจกรรม"
                     color="#83C4F3"
                     v-model="editedItem.organizer"
                     outlined
@@ -67,8 +70,9 @@
                     class="pb-3"
                   ></v-text-field>
 
-                  <v-card-subtitle class="pa-0 font_size_head">Image:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 font_size_head">รูปภาพ:</v-card-subtitle>
                   <v-text-field
+                    placeholder="กรุณาใส่ URL ของรูปภาพ"
                     color="#83C4F3"
                     v-model="editedItem.image"
                     outlined
@@ -76,7 +80,7 @@
                     hide-details
                     class="pb-3"
                   ></v-text-field> 
-                  <v-card-subtitle class="pa-0 font_size_head">Date:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 font_size_head">วันที่จัดกิจกรรม:</v-card-subtitle>
                   <v-menu
                     v-model="menudate"
                     :close-on-content-click="false"
@@ -86,6 +90,7 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
+                        placeholder="กรุณาเลือกวันที่จัดกิจกรรม"
                         v-model="editedItem.date"
                         append-icon="mdi-calendar"
                         readonly
@@ -101,8 +106,7 @@
                     </template>
                     <v-date-picker
                       v-model="editedItem.date"
-                      :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                      min="1950-01-01"
+                      :min="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
                       @change="menudate = false"
                       >
                       
@@ -112,25 +116,7 @@
                   <v-container class="pa-0 pt-3 pb-3">
                     <v-row>
                       <v-col class="time_style">
-                        <v-card-subtitle class="pa-0 font_size_head">Start time:</v-card-subtitle>
-                        <!-- <v-select
-                          color="#83C4F3"
-                          v-model="editedItem.start_time_select"
-                          :items="start_time_select"
-                          dense
-                          outlined
-                          hide-details
-                          type="time"
-                        ></v-select> -->
-                        <!-- <v-text-field
-                        color="#83C4F3"
-                        v-model="editedItem.start_time_select"
-                        dense
-                        outlined
-                        hide-details
-                        type="time"
-                        format="24hr"
-                        ></v-text-field> -->
+                        <v-card-subtitle class="pa-0 font_size_head">เวลาเริ่มกิจกรรม:</v-card-subtitle>
                         <v-menu
                           ref="menu"
                           v-model="time"
@@ -144,6 +130,7 @@
                         >
                           <template v-slot:activator="{ on, attrs }">
                             <v-text-field
+                              placeholder="กรุณาเลือกเวลาเริ่มกิจกรรม"
                               v-model="editedItem.start_time_select"
                               readonly
                               dense
@@ -164,24 +151,7 @@
                       </v-col>
 
                       <v-col class="time_style">
-                        <v-card-subtitle class="pa-0 font_size_head">End time:</v-card-subtitle>
-                        <!-- <v-select
-                          color="#83C4F3"
-                          v-model="editedItem.end_time_select"
-                          :items="end_time_select"
-                          dense
-                          outlined
-                          hide-details
-                        ></v-select> -->
-                        <!-- <v-text-field
-                        color="#83C4F3"
-                        v-model="editedItem.end_time_select"
-                        dense
-                        outlined
-                        hide-details
-                        type="time"
-                        ></v-text-field> -->
-
+                        <v-card-subtitle class="pa-0 font_size_head">เวลาสิ้นสุดกิจกรรม:</v-card-subtitle>
                         <v-menu
                           ref="menu2"
                           v-model="time2"
@@ -195,6 +165,7 @@
                         >
                           <template v-slot:activator="{ on, attrs }">
                             <v-text-field
+                              placeholder="กรุณาเลือกเวลาสิ้นสุดกิจกรรม"
                               v-model="editedItem.end_time_select"
                               readonly
                               dense
@@ -209,6 +180,7 @@
                             format="24hr"
                             v-model="editedItem.end_time_select"
                             full-width
+                            :min= "editedItem.start_time_select"                  
                             @click:minute="$refs.menu2.save(editedItem.end_time_select)"
                           ></v-time-picker>
                           </v-menu>
@@ -216,13 +188,15 @@
                     </v-row>
                   </v-container>
 
-                  <v-card-subtitle class="pa-0 pt-3  font_size_head">Maximum member:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 pt-3  font_size_head">จำนวนสมาชิกสูงสุด:</v-card-subtitle>
                     <v-text-field
+                    placeholder="กรุณาใส่จำนวนสมาชิกสูงสุด"
                     color="#83C4F3"
                     v-model="editedItem.maximun_member"
                     dense
                     outlined
                     type="number"
+                    min="0"
                     hide-details
                   ></v-text-field>
             </v-form>
@@ -232,8 +206,9 @@
 
               <v-col>
                 <v-form>
-                  <v-card-subtitle class="pa-0 pt-3 font_size_head">Description:</v-card-subtitle>
+                  <v-card-subtitle class="pa-0 pt-3 font_size_head">รายละเอียด:</v-card-subtitle>
                   <v-textarea
+                    placeholder="กรุณาใส่รายละเอียด"
                     v-model="editedItem.description"
                     color="#83C4F3"
                     outlined
@@ -244,7 +219,7 @@
                   >
                   </v-textarea>
                     
-                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Certificate:</v-card-subtitle>
+                    <v-card-subtitle class="pa-0 pb-2 font_size_head">ใบรับรอง:</v-card-subtitle>
                     <v-radio-group
                       v-model="editedItem.certificate"
                       row
@@ -253,41 +228,42 @@
                     >
                       <v-radio
                         color="#83C4F3"
-                        label="Have certificate"
-                        value='Have certificate'
+                        label="มีใบรับรอง"
+                        value='มีใบรับรอง'
                       ></v-radio>
                       <v-radio
                         color="#83C4F3"
-                        label="No certificate"
-                        value='No certificate'
+                        label="ไม่มีใบรับรอง"
+                        value='ไม่มีใบรับรอง'
                       ></v-radio>
                     </v-radio-group>
 
-                    <v-card-subtitle class="pa-0 pb-2 font_size_head">Support:</v-card-subtitle>
+                    <v-card-subtitle class="pa-0 pb-2 font_size_head">การสนับสนุน:</v-card-subtitle>
                     
                           <v-checkbox
                             v-model="editedItem.food"
                             color="#83C4F3"
-                            label="Food"
+                            label="อาหาร"
                             hide-details
-                            value="Food"
+                            value="อาหาร"
                           ></v-checkbox>
 
                           <v-checkbox
                             v-model="editedItem.souvenir"
                             color="#83C4F3"
-                            label="Souvenir"
+                            label="ของที่ระลึก"
                             hide-details
-                            value="Souvenir"
+                            value="ของที่ระลึก"
                           ></v-checkbox>
                           <v-checkbox
                             v-model="editedItem.other_box"
                             color="#83C4F3"
-                            label="Other"
+                            label="อื่นๆ"
                             hide-details
-                            value="Other"
+                            value="อื่นๆ"
                           ></v-checkbox>
                             <v-text-field
+                              placeholder="อื่นๆ"
                               color="#83C4F3"
                               :disabled="!editedItem.other_box"
                               v-model="editedItem.other"
@@ -307,14 +283,14 @@
                 text
                 @click="close"
               >
-                Cancel
+                ยกเลิก
               </v-btn>
               <v-btn
                 color="blue darken-1"
                 text
                 @click="save"
               >
-                Save
+                บันทึก
               </v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
@@ -322,11 +298,11 @@
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
-            <v-card-title class="title-card text-primary text-center">Are you sure you want to delete this item?</v-card-title>
+            <v-card-title class="title-card text-primary text-center">คุณแน่ใจแล้วใช่ไหมที่จะลบกิจกรรมนี้?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-btn color="blue darken-1" text @click="closeDelete">ยกเลิก</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">ตกลง</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -334,7 +310,7 @@
 
         <v-dialog v-model="dialogDetail" max-width="1400px"> 
           <v-card>
-            <v-card-title class="title-card text-primary text-center">Event Detail</v-card-title>
+            <v-card-title class="title-card text-primary text-center">รายละเอียดกิจกรรม</v-card-title>
             <v-container fluid>
             <v-row>
               <v-col cols="5">
@@ -344,50 +320,61 @@
                         </div>
 
                         <v-card-text class="pt-4 pb-0 font_size_normal">
-                         <span class="font_size_head">Title:  </span>  {{editedItem.title}}
+                         <span class="font_size_head">ชื่อกิจกรรม:  </span>  {{editedItem.title}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Organizer:  </span>  {{editedItem.organizer}}
-                        </v-card-text>
-
-                        <v-card-subtitle class="pt-2 pb-2 font_size_head">
-                          Description:
-                        </v-card-subtitle>
-                        <v-card-text class="text--primary pt-0 pb-2 font_size_normal">
-                          <div>{{editedItem.description}}</div>
+                         <span class="font_size_head">ผู้จัดกิจกรรม:  </span>  {{editedItem.organizer}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Date:  </span>  {{editedItem.date}}
+                         <span class="font_size_head">รายละเอียด:  </span>  {{editedItem.description}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Time:  </span>  {{editedItem.start_time_select}} - {{editedItem.end_time_select}}
+                         <span class="font_size_head">วันที่จัดกิจกรรม:  </span>  {{editedItem.date}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Certificate:  </span>  {{editedItem.certificate}}
+                         <span class="font_size_head">เวลาเริ่มกิจกรรม:  </span>  {{editedItem.start_time_select}} - {{editedItem.end_time_select}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Support:  </span>  {{editedItem.food}} {{editedItem.souvenir}} {{editedItem.other}}
+                         <span class="font_size_head">ใบรับรอง:  </span>  {{editedItem.certificate}}
                         </v-card-text>
 
                         <v-card-text class="pt-2 pb-2 font_size_normal">
-                         <span class="font_size_head">Maximun member:  </span>  {{editedItem.maximun_member}}
+                         <span class="font_size_head">การสนับสนุน:  </span>  {{editedItem.food}} {{editedItem.souvenir}} {{editedItem.other_box}} {{editedItem.other}}
+                        </v-card-text>
+
+                        <v-card-text class="pt-2 pb-2 font_size_normal">
+                         <span class="font_size_head">จำนวนสมาชิกสูงสุด:  </span>  {{editedItem.maximun_member}}
                         </v-card-text>
                  
               </v-col>
               <v-divider vertical></v-divider>
               <v-col cols="7">
+                <v-toolbar-title>
+                  <v-text-field
+                    placeholder="คีย์เวิร์ดที่ต้องการค้นหา"
+                    v-model="search2"
+                    append-icon="mdi-magnify"
+                    label="ค้นหา"
+                    single-line
+                    hide-details
+                    dense
+                    outlined
+                  ></v-text-field>
+                </v-toolbar-title>
                 <v-data-table
                 :headers="headers2"
                 :items="editedItem.members"
-                :search="search"
+                :search="search2"
                 sort-by="title"
-                class="elevation-0">
+                class="elevation-0"
+                >
                 </v-data-table>
+                
               </v-col>
             </v-row>
           </v-container>
@@ -407,7 +394,7 @@
       small
       @click="moredetailItem(item)"
     >
-      More Details
+      รายละเอียดเพิ่มเติม
     </v-btn>
      <v-btn
       elevation="0"
@@ -415,11 +402,10 @@
       
       @click="editItem(item)"
     >
-      Edit
+      แก้ไขกิจกรรม
       <v-icon
         small
         class="mr-2"
-        
       >
         mdi-pencil
       </v-icon>
@@ -429,10 +415,9 @@
       small
       @click="deleteItem(item)"
     >
-      Delete
+      ลบกิจกรรม
       <v-icon
         small
-        
       >
         mdi-delete
       </v-icon>
@@ -444,24 +429,19 @@
         @click="initialize"
         outlined
       >
-        Reset
+        รีเซ็ต
       </v-btn>
     </template>
   </v-data-table>
 </template>
 <script>
-import { format, parseISO } from 'date-fns'
   export default {
-    // data: () => ({
-    // }),
     data () {
       return {
-      // start_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-      // end_time_select: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-      date: null,
       menudate: false,
       certificate: null,
       search: '',
+      search2: '',
       dialog: false,
       dialogDelete: false,
       dialogDetail: false,
@@ -469,27 +449,27 @@ import { format, parseISO } from 'date-fns'
       time2: false,
       headers: [
         {
-          text: 'Title',
+          text: 'ชื่อกิจกรรม',
           align: 'start',
           sortable: false,
           value: 'title',
         },
-        { text: 'Organizer', value: 'organizer' },
-        { text: 'Date', value: 'date' },
-        { text: 'Start Time', value: 'start_time_select'},
-        { text: 'End Time', value: 'end_time_select' },
-        { text: 'Actions', value: 'actions', sortable: false },
+        { text: 'ผู้จัดกิจกรรม', value: 'organizer' },
+        { text: 'วันที่จัดกิจกรรม', value: 'date' },
+        { text: 'เวลาเริ่มกิจกรรม', value: 'start_time_select'},
+        { text: 'เวลาสิ้นสุดกิจกรรม', value: 'end_time_select' },
+        { value: 'actions', sortable: false },
       ],
       event_data: [],
       editedIndex: -1,
       editedItem: { 
         title:"",
         organizer:"",
-        date:"",
+        date:(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         start_time_select:"",
         end_time_select:"",
         image:"",
-        maximun_member:"",
+        maximun_member:"100",
         description:"",
         food:"",
         souvenir:"",
@@ -499,11 +479,11 @@ import { format, parseISO } from 'date-fns'
       defaultItem: {
         title:"",
         organizer:"",
-        date:"",
+        date:(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         start_time_select:"",
         end_time_select:"",
         image:"",
-        maximun_member:"",
+        maximun_member:"100",
         description:"",
         food:"",
         souvenir:"",
@@ -513,24 +493,24 @@ import { format, parseISO } from 'date-fns'
 
       headers2: [      
         { 
-          text: 'Firstname',
+          text: 'ชื่อ',
           align: 'start',
           sortable: false,
           value: 'firstname',
         },
-        { text: 'Lastname', value: 'lastname' },
-        { text: 'Gender', value: 'gender'},
-        { text: 'Student ID', value: 'studentID'},
-        { text: 'Year of class', value: 'yearclass'},
-        { text: 'Email', value: 'email' },
-        { text: 'Phone Number', value: 'phonenumber' },
+        { text: 'นามสกุล', value: 'lastname' },
+        { text: 'เพศ', value: 'gender'},
+        { text: 'รหัสนักเรียน', value: 'studentID'},
+        { text: 'ชั้นปี', value: 'yearclass'},
+        { text: 'อีเมล', value: 'email' },
+        { text: 'เบอร์โทรศัพท์', value: 'phonenumber' },
       ],
       }
     },
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'Add Event' : 'Edit Event'
+        return this.editedIndex === -1 ? 'เพิ่มกิจกรรม' : 'แก้ไขกิจกรรม'
       },
     },
 
@@ -556,7 +536,6 @@ import { format, parseISO } from 'date-fns'
         let events = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/events.json")
         let members = await this.$axios.get("https://event-bot-628b6-default-rtdb.firebaseio.com/members.json")
         const entries_events =  Object.entries(events.data).map(([eventId, eventValue]) => ({id : eventId, ...eventValue }))
-        // const entries_members = Object.entries(members.data).map(([memberId, membersValue]) => ({id : memberId, ...membersValue.profile }))
         this.event_data = entries_events.map(e => {
             return {
                 ...e,
